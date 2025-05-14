@@ -1,0 +1,95 @@
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.656 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.829 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.396 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.639 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.349 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.555 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.718 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.674 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.472 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.852 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.461 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.573 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.793 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.739 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.321 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.763 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.334 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.656 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
+New Card Detected
+Address Data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Sending UID: 0x3d913304
+Response took: 0.576 seconds
+Received: {'message': 'Hello ESP32, got your value: 0x3d913304'}
