@@ -93,6 +93,9 @@ while True:
     sensor_data = read_sensors()
     response = com_raspi(sensor_data)
     success = response is not None
+
+    # Sent data looks something like this:
+    # {'ID': 1, 'Aqi': 2, 'Tvoc': 73, 'Eco2': 502, 'Rh_ens': 0.1953125, 'Eco2_rating': 'Excellent - Target level', 'Tvoc_rating': 'Good', 'Temp_ens': 276.0063, 'Temp_aht': 25.67, 'Rh_aht': 40.45, 'ERRORS': 0}
     # indicate_success(success)
     sleep(10)
 
