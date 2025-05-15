@@ -1,0 +1,54 @@
+/* General body styling */
+body {
+  background-color: rgb(207, 124, 193);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #de7ac3;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container styling */
+.container {
+  background-color: rgba(192, 95, 21, 0.56);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Header */
+h1 {
+  font-weight: bold;
+  color: #020000;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Sensor data display */
+.text-center.fs-2 {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+/* Sensor values */
+#temperature,
+#humidity {
+  font-weight: bold;
+  color: #af4c4c;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Highlight effect on update */
+#temperature.updated,
+#humidity.updated {
+  color: #ffeb3b;
+  transform: scale(1.1);
+}
+
+/* Timestamp styling */
+#timestamp {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #17b411;
+}
