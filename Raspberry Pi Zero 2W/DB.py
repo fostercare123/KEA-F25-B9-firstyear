@@ -37,31 +37,32 @@ cursor.execute('''
         paid REAL
     )
 ''')
-conn.close()
 
+### environment
+# Example
+# {'ID': 1, 'Aqi': 2, 'Tvoc': 73, 'Eco2': 502, 'Rh_ens': 0.1953125,
+#  'Eco2_rating': 'Excellent - Target level', 'Tvoc_rating': 'Good',
+#  'Temp_ens': 276.0063, 'Temp_aht': 25.67, 'Rh_aht': 40.45, 'ERRORS': 0}
+# 
 
-# Function to insert a value reading with automatic timestamp
-def create_new_employee(name, tagid, salary, otlimit, otform):
-    # Connect to the database
-    # conn = sqlite3.connect("example.db")
-    conn = sqlite3.connect("example.db", check_same_thread=False)
-    cursor = conn.cursor()
-    '''
-    - id - float/REAL: Standard ID som laves i DB automatisk (autoincrement). 
-    Bruges også til at finde underdatabasen til hver ansat
-    - tagid - string/TEXT: RFID tag id. 
-    - name - string: Navn til lettere genkendelse i systemet
-    - salary - float: Timelånen opgivet i kr i timen, eg "185" for 185 dkk i timen
-    - otlimit - float: Hvornår skal der betales OT (Overtime). Opgiv i timer, fx 6 timer, hvorefter der betales ot
-    - otform - float: 50% ekstra i lån, 100% etc. Opgiv i procent, fx "50" for 50% ekstra i overtid
-    - timestamp for oprettelse i systemet
-    '''
-    cursor.execute('''
-        INSERT INTO main (name, tagid, salary, otlimit, otform)
-        VALUES (?, ?, ?, ?, ?)
-    ''', (name, tagid, salary, otlimit, otform))
-    conn.commit()
-    conn.close()
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS environment (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+        Aqi REAL,
+        Tvoc REAL,
+        Eco2 REAL,
+        Rhens REAL,
+        Eco2rating TEXT,
+        Tvocrating TEXT,
+        Tempens REAL,
+        Tempaht REAL,
+        Rhaht REAL
+    )
+''')
+conn.close() #THIS BIT LAST!!!
+# Api Tvoc Eco2 Rhens Eco2rating Tvocrating Tempens Tempaht Rhaht
+
 
 
 # Function to fetch all readings
@@ -88,6 +89,58 @@ def fetch_temperatures_last_x_minutes(minutes):
     ''', (f'-{minutes} minutes',))
     return cursor.fetchall()
     conn.close()    
+
+
+#                                                             #
+# environment ### environment ### environment ### environment #
+#                                                             #
+
+
+# Function to insert a new temp reading with automatic timestamp
+def create_new_temp_reading(Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht):
+    # Connect to the database
+    # conn = sqlite3.connect("example.db")
+    conn = sqlite3.connect("example.db", check_same_thread=False)
+    cursor = conn.cursor()
+    '''
+    Aqi Tvoc Eco2 Rhens Eco2rating Tvocrating Tempens Tempaht Rhaht
+    '''
+    cursor.execute('''
+        INSERT INTO environment (Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht))
+    conn.commit()
+    conn.close()
+
+
+#                                                     #
+# EMPLOYESS ### EMPLOYESS ### EMPLOYESS ### EMPLOYESS #
+#                                                     #
+
+
+# Function to insert a employee with automatic timestamp
+def create_new_employee(name, tagid, salary, otlimit, otform):
+    # Connect to the database
+    # conn = sqlite3.connect("example.db")
+    conn = sqlite3.connect("example.db", check_same_thread=False)
+    cursor = conn.cursor()
+    '''
+    - id - float/REAL: Standard ID som laves i DB automatisk (autoincrement). 
+    Bruges også til at finde underdatabasen til hver ansat
+    - tagid - string/TEXT: RFID tag id. 
+    - name - string: Navn til lettere genkendelse i systemet
+    - salary - float: Timelånen opgivet i kr i timen, eg "185" for 185 dkk i timen
+    - otlimit - float: Hvornår skal der betales OT (Overtime). Opgiv i timer, fx 6 timer, hvorefter der betales ot
+    - otform - float: 50% ekstra i lån, 100% etc. Opgiv i procent, fx "50" for 50% ekstra i overtid
+    - timestamp for oprettelse i systemet
+    '''
+    cursor.execute('''
+        INSERT INTO main (name, tagid, salary, otlimit, otform)
+        VALUES (?, ?, ?, ?, ?)
+    ''', (name, tagid, salary, otlimit, otform))
+    conn.commit()
+    conn.close()
+
 def fetch_employees():
     # Connect to the database
     # conn = sqlite3.connect("example.db")
@@ -205,33 +258,3 @@ def sessionupdate(name):
         conn.commit()
     print("\n----------")
     conn.close()
-
-'''
-while True:
-    print(f"\nWhat do you want to do?\n1: Exit\n2: Create new employee\n3: Show main DB\n4: Sessions")
-    select = int(input("Chosse a number: "))
-    print("\n----------\n")
-    if select == 1:
-        break
-    if select  == 2:
-        print(f"adding new employee\nType tagID as a string/TEXT:")
-        tagid = input()
-        print(f"adding new employee\nType name as a string/TEXT:")
-        name = input()
-        print(f"adding new employee\nType salary as a float/REAL:")
-        salary = float(input())
-        print(f"adding new employee\nType OTlimit as a float/REAL. 6 = after 6 hours, overtime is begun:")
-        otlimit = float(input())
-        print(f"adding new employee\nType salary as a float/REAL. 50 = 50% after OTlimit is reached")
-        otform = float(input())
-        create_new_employee(name, tagid, salary, otlimit, otform)
-    if select == 3:
-        print("Employee added last 2 minuttes", fetch_temperatures_last_x_minutes(2))
-        print("Total number of employees",fetch_all_temperatures())
-    if select == 4:
-        fetch_employees()
-        print("Name employee for session:")
-        name = input()
-        sessionupdate(name) #There should be a function to update a tag from tagid to name,
-'''
-
