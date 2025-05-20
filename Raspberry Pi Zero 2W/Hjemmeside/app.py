@@ -35,9 +35,9 @@ def index():
 def dashboard():
     return render_template('dashboard.html', sensors=sample_sensors)
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
+@app.route('/om')
+def om():
+    return render_template('om.html')
 
 @app.route('/settings')
 def settings():
