@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}IoT Platform - Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+    .sensor-card {
+        transition: transform 0.3s ease;
+    }
+    
+    .sensor-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .gauge-container {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    .sensor-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    
+    .sensor-unit {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Sensor Dashboard</h1>
+    <div class="dashboard-controls">
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-primary active" id="realtime-btn">
+                <i class="fas fa-bolt"></i> Real-time
+            </button>
+            <button type="button" class="btn btn-outline-primary" id="historical-btn">
+                <i class="fas fa-history"></i> Historical
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <i class="fas fa-chart-line me-2"></i>System Overview
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <h5>Devices</h5>
+                        <div class="display-4">3</div>
+                        <span class="badge bg-success">All Online</span>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h5>Average Temperature</h5>
+                        <div class="display-4" id="avg-temp">
+                            {{ (sensors.esp32_1.temperature + sensors.esp32_2.temperature + sensors.esp32_3.temperature) / 3 | round(1) }}
+                        </div>
+                        <span class="badge bg-info">°C</span>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h5>Average Humidity</h5>
+                        <div class="display-4" id="avg-humidity">
+                            {{ (sensors.esp32_1.humidity + sensors.esp32_2.humidity + sensors.esp32_3.humidity) / 3 | round(1) }}
+                        </div>
+                        <span class="badge bg-info">%</span>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h5>Data Points Today</h5>
+                        <div class="display-4">142</div>
+                        <span class="badge bg-primary">Since 00:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <i class="fas fa-chart-area me-2"></i>Temperature & Humidity Chart
+            </div>
+            <div class="card-body">
+                <div class="text-center p-5">
+                    <i class="fas fa-chart-line fa-5x text-muted"></i>
+                    <p class="mt-3 text-muted">Real-time chart will appear here when ESP32 data starts flowing</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for device_id, device in sensors.items() %}
+    <div class="col">
+        <div class="card h-100 sensor-card">
+            <div class="card-header bg-primary text-white">
+                <i class="fas fa-microchip me-2"></i>{{ device.name }}
+            </div>
+            <div class="card-body text-center">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="gauge-container mb-3">
+                            <i class="fas fa-thermometer-half fa-4x text-danger"></i>
+                        </div>
+                        <div class="sensor-value" id="{{ device_id }}-temp">{{ device.temperature }}</div>
+                        <div class="sensor-unit">°C</div>
+                        <p>Temperature</p>
+                    </div>
+                    <div class="col-6">
+                        <div class="gauge-container mb-3">
+                            <i class="fas fa-water fa-4x text-primary"></i>
+                        </div>
+                        <div class="sensor-value" id="{{ device_id }}-humidity">{{ device.humidity }}</div>
+                        <div class="sensor-unit">%</div>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <span class="badge {{ 'bg-success' if device.status == 'online' else 'bg-danger' }}">
+                    <i class="fas {{ 'fa-check-circle' if device.status == 'online' else 'fa-times-circle' }} me-1"></i>
+                    {{ device.status }}
+                </span>
+                <span>Last updated: Just now</span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+socket.on('sensor_update', function(data) {
+    console.log('Dashboard received sensor update:', data);
+    
+    // Update the sensor values with new data
+    let totalTemp = 0;
+    let totalHumidity = 0;
+    let count = 0;
+    
+    for (const [device_id, device] of Object.entries(data)) {
+        document.getElementById(`${device_id}-temp`).textContent = device.temperature;
+        document.getElementById(`${device_id}-humidity`).textContent = device.humidity;
+        
+        totalTemp += parseFloat(device.temperature);
+        totalHumidity += parseFloat(device.humidity);
+        count++;
+    }
+    
+    // Update averages
+    document.getElementById('avg-temp').textContent = (totalTemp / count).toFixed(1);
+    document.getElementById('avg-humidity').textContent = (totalHumidity / count).toFixed(1);
+});
+
+// Toggle between real-time and historical view
+document.getElementById('realtime-btn').addEventListener('click', function() {
+    this.classList.add('active');
+    document.getElementById('historical-btn').classList.remove('active');
+});
+
+document.getElementById('historical-btn').addEventListener('click', function() {
+    this.classList.add('active');
+    document.getElementById('realtime-btn').classList.remove('active');
+    alert('Historical data view will be implemented in a future update');
+});
+{% endblock %}
