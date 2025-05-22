@@ -186,19 +186,6 @@
 
 {% block extra_js %}
 <script>
-    // Update connection status
-    socket.on('connect', function() {
-        document.getElementById('connection-icon').classList.remove('text-danger');
-        document.getElementById('connection-icon').classList.add('text-success');
-        document.getElementById('connection-text').textContent = 'Connected';
-    });
-
-    socket.on('disconnect', function() {
-        document.getElementById('connection-icon').classList.remove('text-success');
-        document.getElementById('connection-icon').classList.add('text-danger');
-        document.getElementById('connection-text').textContent = 'Disconnected';
-    });
-
     socket.on('sensor_update', function(data) {
         console.log('Dashboard received sensor update:', data);
         let totalTemp = 0;
@@ -225,47 +212,55 @@
     });
 
     socket.on('CO2TVOCgraph', function(data) {
+        console.log('Received CO2TVOCgraph:', data);
         const isHistorical = document.getElementById('historical-graphs').classList.contains('d-none') ? false : true;
         if (isHistorical) {
             document.getElementById('CO2TVOCgraph-historical').src = 'data:image/png;base64,' + data.image;
-            document.getElementById('CO2TVOC-title').textContent = `CO2 and TVOC (Last ${data.minutes} Minutes)`;
+            document.getElementById('CO2TVOC-title').textContent = `CO2 og TVOC (Sidste ${data.minutes} Minutter)`;
         } else {
             document.getElementById('CO2TVOCgraph').src = 'data:image/png;base64,' + data.image;
         }
     });
 
     socket.on('temp_graph', function(data) {
+        console.log('Received temp_graph:', data);
         const isHistorical = document.getElementById('historical-graphs').classList.contains('d-none') ? false : true;
         if (isHistorical) {
             document.getElementById('tempgraph-historical').src = 'data:image/png;base64,' + data.image;
-            document.getElementById('temp-title').textContent = `Temperature (Last ${data.minutes} Minutes)`;
+            document.getElementById('temp-title').textContent = `Temperatur (Sidste ${data.minutes} Minutter)`;
         } else {
             document.getElementById('tempgraph').src = 'data:image/png;base64,' + data.image;
         }
     });
 
     socket.on('air_graph', function(data) {
+        console.log('Received air_graph:', data);
         const isHistorical = document.getElementById('historical-graphs').classList.contains('d-none') ? false : true;
         if (isHistorical) {
             document.getElementById('airgraph-historical').src = 'data:image/png;base64,' + data.image;
-            document.getElementById('air-title').textContent = `Air Quality (Last ${data.minutes} Minutes)`;
+            document.getElementById('air-title').textContent = `Luftkvalitet (Sidste ${data.minutes} Minutter)`;
         } else {
             document.getElementById('airgraph').src = 'data:image/png;base64,' + data.image;
         }
     });
 
-    // Toggle between real-time and historical view
     const realtimeBtn = document.getElementById('realtime-btn');
     const historicalBtn = document.getElementById('historical-btn');
     const realtimeGraphs = document.getElementById('realtime-graphs');
     const historicalGraphs = document.getElementById('historical-graphs');
+
+    // Request initial graphs on page load for Real Time
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Page loaded, requesting initial real-time graphs');
+        socket.emit('request_historical', 5);
+    });
 
     realtimeBtn.addEventListener('click', function() {
         this.classList.add('active');
         historicalBtn.classList.remove('active');
         realtimeGraphs.classList.remove('d-none');
         historicalGraphs.classList.add('d-none');
-        socket.emit('request_historical', 5); // Reset to real-time
+        socket.emit('request_historical', 5);
     });
 
     historicalBtn.addEventListener('click', function() {
