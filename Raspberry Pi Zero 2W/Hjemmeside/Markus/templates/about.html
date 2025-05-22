@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block title %}IoT Platform - About{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <h1 class="border-bottom pb-2">Om IoT platformen</h1>
+    </div>
+</div>
+
+<div class="row align-items-center mb-5">
+    <div class="col-md-6">
+        <h2>Project Overview</h2>
+        <p class="lead">
+            This IoT platform was developed as a first-year university project to demonstrate the integration
+            of embedded systems with web technologies.
+        </p>
+        <p>
+            Our system collects data from three ESP32 microcontrollers equipped with various sensors,
+            processes this data on a Raspberry Pi Zero 2W, and presents it through this intuitive web interface.
+        </p>
+        <p>
+            The platform allows for real-time monitoring of environmental conditions and will eventually
+            support device control capabilities.
+        </p>
+    </div>
+    <div class="col-md-6">
+        <img src="/static/images/architecture.svg" alt="System Architecture" class="img-fluid rounded shadow">
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">Technology Stack</h3>
+            </div>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-server fa-3x mb-3 text-primary"></i>
+                                <h4>Backend</h4>
+                                <ul class="list-unstyled">
+                                    <li>Python</li>
+                                    <li>Flask</li>
+                                    <li>Socket.IO</li>
+                                    <li>Raspberry Pi OS</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-desktop fa-3x mb-3 text-primary"></i>
+                                <h4>Frontend</h4>
+                                <ul class="list-unstyled">
+                                    <li>HTML5</li>
+                                    <li>CSS3</li>
+                                    <li>JavaScript</li>
+                                    <li>Bootstrap 5</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-microchip fa-3x mb-3 text-primary"></i>
+                                <h4>Hardware</h4>
+                                <ul class="list-unstyled">
+                                    <li>Raspberry Pi Zero 2W</li>
+                                    <li>3× ESP32</li>
+                                    <li>Temperature Sensors</li>
+                                    <li>Humidity Sensors</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="mb-4">Studiegruppe 2B9</h2>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card team-card h-100">
+            <div class="card-body text-center">
+                <div class="team-avatar mb-3">
+                    <i class="fas fa-user-circle fa-5x text-primary"></i>
+                </div>
+                <h4>Mehmet Altunay</h4>
+                <p class="text-muted">Elektro musician</p>
+                <p>Ansvarlig og dygtig</p>
+            </div>
+        </div>
+    </div>
+<div class="col-md-4 mb-4">
+        <div class="card team-card h-100">
+            <div class="card-body text-center">
+                <div class="team-avatar mb-3">
+                    <i class="fas fa-user-circle fa-5x text-primary"></i>
+                </div>
+                <h4>Samuel Benn Sabroe</h4>
+                <p class="text-muted">Skørt geni, som elsker dyr</p>
+                <p>Elsker databaser</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card team-card h-100">
+            <div class="card-body text-center">
+                <div class="team-avatar mb-3">
+                    <i class="fas fa-user-circle fa-5x text-primary"></i>
+                </div>
+                <h4>Vasilije Niko Nikolic</h4>
+                <p class="text-muted">Boomer fra 1991</p>
+                <p>???</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card team-card h-100">
+            <div class="card-body text-center">
+                <div class="team-avatar mb-3">
+                    <i class="fas fa-user-circle fa-5x text-primary"></i>
+                </div>
+                <h4>Markus Hajdu</h4>
+                <p class="text-muted">Fysik- og kemi ekspert</p>
+                <p>Risiko for brændfare</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

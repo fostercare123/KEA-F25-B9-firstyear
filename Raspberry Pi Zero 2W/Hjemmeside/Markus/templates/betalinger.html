@@ -1,0 +1,18 @@
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Dato</th>
+      <th>Total betalingd</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for dato, total in salary_data %}
+    <tr>
+      <td>{{ dato }}</td>
+      <td>{{ total }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
