@@ -7,15 +7,15 @@
     <div class="col-lg-6">
         <div class="hero-text">
             <h1 class="display-4 fw-bold text-primary">Gordion's IoT platform</h1>
-            <p class="lead">Her kan du se og styre dine IoT enheder</p>
-            <p class="mb-4">Denne platform er forbundet til de tre enheder, som indsamler data. Få live-opdaterede målinger, analyser tendenser og styr dine enheder - uanset hvor du er.</p>
+            <p class="lead">Her kan du se og styre dine IoT-enheder</p>
+            <p class="mb-4">Denne platform er forbundet til enheder, som indsamler data. Få live-opdaterede målinger, analyser tendenser og styr dine enheder - uanset hvor du er.</p>
         </div>
     </div>
 </div>
 
 <div class="row mt-5">
     <div class="col-12">
-        <h2 class="text-center mb-4">Connected Devices</h2>
+        <h2 class="text-center mb-4">Forbundne Enheder</h2>
     </div>
 </div>
 
@@ -28,18 +28,18 @@
                 <h5 class="card-title">{{ device.name }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{ device_id }}</h6>
                 <p class="card-text">
-                    <i class="fas fa-thermometer-half me-2"></i>Temperature: <span class="temp-value">{{ device.temperature }}</span>°C<br>
-                    <i class="fas fa-water me-2"></i>Humidity: <span class="humidity-value">{{ device.humidity }}</span>%
+                    <i class="fas fa-thermometer-half me-2"></i>Temperatur: <span class="temp-value">{{ device.temperature }}</span>°C<br>
+                    <i class="fas fa-water me-2"></i>Fugtighed: <span class="humidity-value">{{ device.humidity }}</span>%
                 </p>
                 <div class="device-status">
                     <span class="badge {{ 'bg-success' if device.status == 'online' else 'bg-danger' }}">
-                        {{ device.status }}
+                        {{ 'Online' if device.status == 'online' else 'Offline' }}
                     </span>
                 </div>
             </div>
             <div class="card-footer">
                 <button class="btn btn-sm btn-primary w-100" onclick="location.href='/dashboard'">
-                    <i class="fas fa-chart-line me-1"></i>View Details
+                    <i class="fas fa-chart-line me-1"></i>Vis Detaljer
                 </button>
             </div>
         </div>
@@ -51,14 +51,14 @@
     <div class="col-12">
         <div class="card bg-light">
             <div class="card-body">
-                <h3 class="card-title">Project Overview</h3>
+                <h3 class="card-title">Projekt Oversigt</h3>
                 <p class="card-text">
-                    This IoT platform is designed for real-time monitoring of environmental conditions using three ESP32 devices.
-                    Each device is equipped with various sensors collecting data on temperature, humidity, and more.
+                    Denne IoT-platform er designet til realtids-overvågning af miljøforhold ved hjælp af ESP32-enheder.
+                    Hver enhed er udstyret med sensorer, der indsamler data om temperatur, fugtighed og mere.
                 </p>
                 <p class="card-text">
-                    The system uses a Raspberry Pi Zero 2W as the central hub, collecting data from the ESP32s and serving this web interface.
-                    The communication happens over WiFi, with the data processed and stored on the Raspberry Pi.
+                    Systemet bruger en Raspberry Pi Zero 2W som central hub, der indsamler data fra ESP32-enhederne og serverer denne webgrænseflade.
+                    Kommunikationen foregår over WiFi, med data behandlet og lagret på Raspberry Pi.
                 </p>
             </div>
         </div>
@@ -67,27 +67,29 @@
 {% endblock %}
 
 {% block extra_js %}
-socket.on('sensor_update', function(data) {
-    console.log('Received sensor update:', data);
-    
-    // Update the sensor cards with new data
-    for (const [device_id, device] of Object.entries(data)) {
-        const deviceCard = document.querySelector(`.card-title:contains('${device.name}')`).closest('.device-card');
-        if (deviceCard) {
-            deviceCard.querySelector('.temp-value').textContent = device.temperature;
-            deviceCard.querySelector('.humidity-value').textContent = device.humidity;
-            
-            const statusBadge = deviceCard.querySelector('.device-status .badge');
-            statusBadge.textContent = device.status;
-            
-            if (device.status === 'online') {
-                statusBadge.classList.remove('bg-danger');
-                statusBadge.classList.add('bg-success');
-            } else {
-                statusBadge.classList.remove('bg-success');
-                statusBadge.classList.add('bg-danger');
+<script>
+    socket.on('sensor_update', function(data) {
+        console.log('Received sensor update:', data);
+        for (const [device_id, device] of Object.entries(data)) {
+            const deviceCard = document.querySelector(`.card-title:contains('${device.name}')`)?.closest('.device-card');
+            if (deviceCard) {
+                deviceCard.querySelector('.temp-value').textContent = device.temperature;
+                deviceCard.querySelector('.humidity-value').textContent = device.humidity;
+                const statusBadge = deviceCard.querySelector('.device-status .badge');
+                statusBadge.textContent = device.status === 'online' ? 'Online' : 'Offline';
+                if (device.status === 'online') {
+                    statusBadge.classList.remove('bg-danger');
+                    statusBadge.classList.add('bg-success');
+                    deviceCard.querySelector('.card-status').classList.remove('offline');
+                    deviceCard.querySelector('.card-status').classList.add('online');
+                } else {
+                    statusBadge.classList.remove('bg-success');
+                    statusBadge.classList.add('bg-danger');
+                    deviceCard.querySelector('.card-status').classList.remove('online');
+                    deviceCard.querySelector('.card-status').classList.add('offline');
+                }
             }
         }
-    }
-});
+    });
+</script>
 {% endblock %}
