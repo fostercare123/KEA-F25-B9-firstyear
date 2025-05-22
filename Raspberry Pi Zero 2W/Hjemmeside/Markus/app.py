@@ -152,7 +152,7 @@ def add_user():
     password = request.form['password']
     role = request.form['role']
 
-    conn = sqlite3.connect('usernamek.db')
+    conn = sqlite3.connect('username.db')
     cursor = conn.cursor()
     cursor.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", (username, password, role))
     conn.commit()
