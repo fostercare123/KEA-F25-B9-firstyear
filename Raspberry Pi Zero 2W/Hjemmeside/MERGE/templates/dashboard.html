@@ -186,7 +186,7 @@
 
 {% block extra_js %}
 <script>
-    socket.on('sensor_update', function(data) {
+    window.socket.on('sensor_update', function(data) {
         console.log('Dashboard received sensor update:', data);
         let totalTemp = 0;
         let totalHumidity = 0;
@@ -211,7 +211,7 @@
         }
     });
 
-    socket.on('CO2TVOCgraph', function(data) {
+    window.socket.on('CO2TVOCgraph', function(data) {
         console.log('Received CO2TVOCgraph:', data);
         const isHistorical = document.getElementById('historical-graphs').classList.contains('d-none') ? false : true;
         if (isHistorical) {
@@ -222,7 +222,7 @@
         }
     });
 
-    socket.on('temp_graph', function(data) {
+    window.socket.on('temp_graph', function(data) {
         console.log('Received temp_graph:', data);
         const isHistorical = document.getElementById('historical-graphs').classList.contains('d-none') ? false : true;
         if (isHistorical) {
@@ -233,7 +233,7 @@
         }
     });
 
-    socket.on('air_graph', function(data) {
+    window.socket.on('air_graph', function(data) {
         console.log('Received air_graph:', data);
         const isHistorical = document.getElementById('historical-graphs').classList.contains('d-none') ? false : true;
         if (isHistorical) {
@@ -249,33 +249,31 @@
     const realtimeGraphs = document.getElementById('realtime-graphs');
     const historicalGraphs = document.getElementById('historical-graphs');
 
-    // Request initial graphs on page load for Real Time
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('Page loaded, requesting initial real-time graphs');
-        socket.emit('request_historical', 5);
-    });
-
     realtimeBtn.addEventListener('click', function() {
+        console.log('Switching to Real-Time view');
         this.classList.add('active');
         historicalBtn.classList.remove('active');
         realtimeGraphs.classList.remove('d-none');
         historicalGraphs.classList.add('d-none');
-        socket.emit('request_historical', 5);
+        window.socket.emit('request_historical', 5);
     });
 
     historicalBtn.addEventListener('click', function() {
+        console.log('Switching to Historical view');
         this.classList.add('active');
         realtimeBtn.classList.remove('active');
         realtimeGraphs.classList.add('d-none');
         historicalGraphs.classList.remove('d-none');
         const minutes = document.getElementById('historical-minutes').value;
-        socket.emit('request_historical', minutes);
+        console.log(`Requesting historical graphs for ${minutes} minutes`);
+        window.socket.emit('request_historical', minutes);
     });
 
     document.getElementById('historical-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const minutes = document.getElementById('historical-minutes').value;
-        socket.emit('request_historical', minutes);
+        console.log(`Historical form submitted, requesting ${minutes} minutes`);
+        window.socket.emit('request_historical', minutes);
     });
 </script>
 {% endblock %}

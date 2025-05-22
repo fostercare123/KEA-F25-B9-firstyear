@@ -19,31 +19,33 @@
             <span>IoT Platform © 2025 | 1. års projekt</span>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
-    <script>
-        const socket = io();
-        socket.on('connect', function () {
-            console.log('Forbundet til server');
-            const icon = document.getElementById('connection-icon');
-            const text = document.getElementById('connection-text');
-            if (icon && text) {
-                icon.classList.remove('text-danger');
-                icon.classList.add('text-success');
-                text.textContent = 'Forbundet';
-            }
-        });
-        socket.on('disconnect', function () {
-            console.log('Afbrudt fra server');
-            const icon = document.getElementById('connection-icon');
-            const text = document.getElementById('connection-text');
-            if (icon && text) {
-                icon.classList.remove('text-success');
-                icon.classList.add('text-danger');
-                text.textContent = 'Afbrudt';
-            }
-        });
-    </script>
-    {% block extra_js %}{% endblock %}
-</body>
-</html>
+    <script src="{{ url_for('static', filename='socketio/socket.io.min.js') }}"></script>
+<script src="{{ url_for('static', filename='socketio/socket.io.min.js') }}"></script>
+<script>
+    window.socket = io();  // Make socket globally accessible
+    window.socket.on('connect', function () {
+        console.log('Forbundet til server');
+        const icon = document.getElementById('connection-icon');
+        const text = document.getElementById('connection-text');
+        if (icon && text) {
+            icon.classList.remove('text-danger');
+            icon.classList.add('text-success');
+            text.textContent = 'Forbundet';
+        }
+        // Request initial graphs for dashboard on connect
+        if (window.location.pathname === '/dashboard') {
+            console.log('Connected on dashboard, requesting initial real-time graphs');
+            window.socket.emit('request_historical', 5);
+        }
+    });
+    window.socket.on('disconnect', function () {
+        console.log('Afbrudt fra server');
+        const icon = document.getElementById('connection-icon');
+        const text = document.getElementById('connection-text');
+        if (icon && text) {
+            icon.classList.remove('text-success');
+            icon.classList.add('text-danger');
+            text.textContent = 'Afbrudt';
+        }
+    });
+</script>
