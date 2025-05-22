@@ -12,3 +12,14 @@
 .card-status.offline {
     background-color: red;
 }
+.team-card {
+    transition: transform 0.3s ease;
+}
+.team-card:hover {
+    transform: translateY(-5px);
+}
+.team-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

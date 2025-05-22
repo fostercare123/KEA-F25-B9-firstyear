@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}IoT Platform - Indstillinger{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <h1 class="border-bottom pb-2">Indstillinger</h1>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">Systemindstillinger</h3>
+            </div>
+            <div class="card-body">
+                <p class="lead">
+                    Her kan du tilpasse indstillinger for IoT-platformen, herunder brugerpræferencer og enhedskonfiguration.
+                </p>
+                <p>
+                    Denne sektion er under udvikling. Kommende funktioner vil omfatte:
+                </p>
+                <ul>
+                    <li>Ændring af visningspræferencer (f.eks. temperaturskala: °C/°F)</li>
+                    <li>Konfiguration af notifikationer for enhedsstatus</li>
+                    <li>Administration af ESP32-enheder (f.eks. navngivning, kalibrering)</li>
+                </ul>
+                <p>
+                    Kontakt os for at foreslå funktioner eller få hjælp med platformen.
+                </p>
+                <a href="{{ url_for('om') }}" class="btn btn-primary">
+                    <i class="fas fa-info-circle me-1"></i>Læs mere om platformen
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
