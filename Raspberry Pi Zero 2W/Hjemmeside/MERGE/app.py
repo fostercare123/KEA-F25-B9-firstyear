@@ -31,20 +31,26 @@ def init_username_db():
     conn.commit()
     conn.close()
 
-def update_graphs(minutes=5):
-    graph_img = graphs.create_graph(9, minuts=minutes)  # Temperature (AHT)
-    if graph_img:
-        socketio.emit('temp_graph', {'image': graph_img, 'minutes': minutes})
-    graph_img = graphs.create_graph(3, 4, minuts=minutes)  # TVOC & eCO2
-    if graph_img:
-        socketio.emit('CO2TVOCgraph', {'image': graph_img, 'minutes': minutes})
-    graph_img = graphs.create_graph(4, minuts=minutes)  # eCO2
-    if graph_img:
-        socketio.emit('air_graph', {'image': graph_img, 'minutes': minutes})
+# Add a global variable to track the current timeframe in minutes (default 5)
+current_minutes = 5
 
+# Modify update_graphs to use the global variable instead of a parameter
+def update_graphs():
+    global current_minutes
+    graph_img = graphs.create_graph(9, minuts=current_minutes)  # Temperature (AHT)
+    if graph_img:
+        socketio.emit('temp_graph', {'image': graph_img, 'minutes': current_minutes})
+    graph_img = graphs.create_graph(3, 4, minuts=current_minutes)  # TVOC & eCO2
+    if graph_img:
+        socketio.emit('CO2TVOCgraph', {'image': graph_img, 'minutes': current_minutes})
+    graph_img = graphs.create_graph(4, minuts=current_minutes)  # eCO2
+    if graph_img:
+        socketio.emit('air_graph', {'image': graph_img, 'minutes': current_minutes})
+
+# Update the emit loop to simply call update_graphs using the current_minutes value.
 def emit_loop():
     while True:
-        update_graphs(minutes=5)  # Real-time: last 5 minutes
+        update_graphs()
         sleep(4)
 
 @app.route('/')
@@ -286,8 +292,13 @@ def handle_disconnect():
 
 @socketio.on('request_historical')
 def handle_historical(minutes):
-    print(f'Requested historical graphs for {minutes} minutes')
-    update_graphs(minutes=int(minutes))
+    global current_minutes
+    try:
+        current_minutes = int(minutes)
+    except ValueError:
+        current_minutes = 5
+    print(f'Requested historical graphs for {current_minutes} minutes')
+    update_graphs()
 
 if __name__ == '__main__':
     init_username_db()
