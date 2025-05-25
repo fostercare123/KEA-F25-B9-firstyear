@@ -120,6 +120,11 @@ def create_new_temp_reading(Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Temp
 
 
 # Function to insert a employee with automatic timestamp
+
+# create_new_employee(name, tagid, salary, otlimit, otform)
+# DB.create_new_employee("Bo", "0x53fcc401", 200, 5, 100)
+# Check to see if UID match anyone in the DB
+
 def create_new_employee(name, tagid, salary, otlimit, otform):
     # Connect to the database
     # conn = sqlite3.connect("example.db")
