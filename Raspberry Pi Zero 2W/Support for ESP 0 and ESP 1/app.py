@@ -43,11 +43,11 @@ def receive_data():
         print("New UID reading recived from ESP-0")
         response["ID"] = 0
         response["Retry"] = 0
-    if data['ID'] == 1: # ID = 1, New Temp Reading
+    elif data['ID'] == 1: # ID = 1, New Temp Reading
         print("New Temp reading recived from ESP-1")
         DB.create_new_temp_reading(data['Aqi'], data['Tvoc'], data['Eco2'], data['Rh_ens'], data['Eco2_rating'], data['Tvoc_rating'], data['Temp_ens'], data['Temp_aht'], data['Rh_aht'])
     else:
-        response = {"message": "Hello ESP32, got your value: " + str(data)}
+        response = {"message": "Hello ESP32, got your value, but did not do anything with it: " + str(data)}
     return jsonify(response)
 
 # Webpage / Homepage route
