@@ -113,44 +113,6 @@
     </div>
 </div>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for device_id, device in sensors.items() %}
-    <div class="col">
-        <div class="card h-100 sensor-card">
-            <div class="card-header bg-primary text-white">
-                <i class="fas fa-microchip me-2"></i>{{ device.name }}
-            </div>
-            <div class="card-body text-center">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="gauge-container mb-3">
-                            <i class="fas fa-thermometer-half fa-4x text-danger"></i>
-                        </div>
-                        <div class="sensor-value" id="{{ device_id }}-temp">{{ device.temperature }}</div>
-                        <div class="sensor-unit">°C</div>
-                        <p>Temperatur</p>
-                    </div>
-                    <div class="col-6">
-                        <div class="gauge-container mb-3">
-                            <i class="fas fa-water fa-4x text-primary"></i>
-                        </div>
-                        <div class="sensor-value" id="{{ device_id }}-humidity">{{ device.humidity }}</div>
-                        <div class="sensor-unit">%</div>
-                        <p>Fugtighed</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-                <span class="badge {{ 'bg-success' if device.status == 'online' else 'bg-danger' }}">
-                    <i class="fas {{ 'fa-check-circle' if device.status == 'online' else 'fa-times-circle' }} me-1"></i>
-                    {{ device.status }}
-                </span>
-                <span>Sidst opdateret: Lige nu</span>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
 {% endblock %}
 
 {% block extra_js %}
@@ -193,11 +155,6 @@
     window.socket.on('air_graph', function(data) {
         console.log('Received air_graph:', data);
         document.getElementById('airgraph').src = 'data:image/png;base64,' + data.image;
-    });
-
-    document.getElementById('realtime-btn').addEventListener('click', function() {
-        console.log('Requesting real-time graphs');
-        window.socket.emit('request_realtime');
     });
 </script>
 {% endblock %}

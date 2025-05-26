@@ -65,31 +65,3 @@
     </div>
 </div>
 {% endblock %}
-
-{% block extra_js %}
-<script>
-    socket.on('sensor_update', function(data) {
-        console.log('Received sensor update:', data);
-        for (const [device_id, device] of Object.entries(data)) {
-            const deviceCard = document.querySelector(`.card-title:contains('${device.name}')`)?.closest('.device-card');
-            if (deviceCard) {
-                deviceCard.querySelector('.temp-value').textContent = device.temperature;
-                deviceCard.querySelector('.humidity-value').textContent = device.humidity;
-                const statusBadge = deviceCard.querySelector('.device-status .badge');
-                statusBadge.textContent = device.status === 'online' ? 'Online' : 'Offline';
-                if (device.status === 'online') {
-                    statusBadge.classList.remove('bg-danger');
-                    statusBadge.classList.add('bg-success');
-                    deviceCard.querySelector('.card-status').classList.remove('offline');
-                    deviceCard.querySelector('.card-status').classList.add('online');
-                } else {
-                    statusBadge.classList.remove('bg-success');
-                    statusBadge.classList.add('bg-danger');
-                    deviceCard.querySelector('.card-status').classList.remove('online');
-                    deviceCard.querySelector('.card-status').classList.add('offline');
-                }
-            }
-        }
-    });
-</script>
-{% endblock %}
