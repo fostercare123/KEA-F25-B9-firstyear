@@ -14,6 +14,18 @@ from time import sleep
 app = Flask(__name__)
 socketio = SocketIO(app)
 
+
+# Webpage / Homepage route
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+
+# 
+# Important stuff, dont touch.....
+# 
+
 # Emit loop, that updates the graphs every 5 seconds
 def update_graphs():
     # Temp Graph
@@ -83,11 +95,6 @@ def receive_data():
     else:
         response = {"message": "Hello ESP32, got your value: " + str(data)}
     return jsonify(response)
-
-# Webpage / Homepage route
-@app.route('/')
-def index():
-    return render_template('index.html')
 
 if __name__ == '__main__':
     threading.Thread(target=emit_loop, daemon=True).start() #Starts Sensor Loop with threading enabled
