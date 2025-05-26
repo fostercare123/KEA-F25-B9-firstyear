@@ -103,15 +103,15 @@ def fetch_temps_last_x_minutes(minutes):
     try:
         conn = sqlite3.connect("sensordata.db", check_same_thread=False)
         cursor = conn.cursor()
-        cursor.execute('''
+        query = '''
             SELECT esp_id, timestamp, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht 
             FROM environment
-            WHERE timestamp >= DATETIME('now', ?)
-        ''', (f'-{minutes} minutes',))
+            WHERE timestamp >= DATETIME('now', ?, 'utc')
+        '''
+        cursor.execute(query, (f'-{minutes} minutes',))
         data = cursor.fetchall()
         return data
-    except sqlite3.Error as e:
-        print(f"Error fetching recent temperatures: {e}")
+    except sqlite3.Error:
         return []
     finally:
         conn.close()
@@ -125,8 +125,8 @@ def create_new_temp_reading(Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Temp
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (esp_id, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht))
         conn.commit()
-    except sqlite3.Error as e:
-        print(f"Error inserting temperature reading: {e}")
+    except sqlite3.Error:
+        pass
     finally:
         conn.close()
 
@@ -238,5 +238,22 @@ def sessionupdate(name):
                 conn.commit()
     except sqlite3.Error as e:
         print(f"Error updating session: {e}")
+    finally:
+        conn.close()
+
+def fetch_latest_data():
+    try:
+        conn = sqlite3.connect("sensordata.db", check_same_thread=False)
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT esp_id, timestamp, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht
+            FROM environment
+            WHERE timestamp = (SELECT MAX(timestamp) FROM environment WHERE esp_id = environment.esp_id)
+        ''')
+        data = cursor.fetchall()
+        return data
+    except sqlite3.Error as e:
+        print(f"Error fetching latest data: {e}")
+        return []
     finally:
         conn.close()

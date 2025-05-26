@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+
+{% block title %}IoT Platform - Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+    .sensor-card {
+        transition: transform 0.3s ease;
+    }
+    
+    .sensor-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .gauge-container {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    .sensor-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    
+    .sensor-unit {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Sensor Dashboard</h1>
+    <div class="dashboard-controls">
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-primary active" id="realtime-btn">
+                <i class="fas fa-bolt"></i> Real-time
+            </button>
+            <button type="button" class="btn btn-outline-primary" id="historical-btn">
+                <i class="fas fa-history"></i> Historical
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <i class="fas fa-chart-line me-2"></i>System Oversigt
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <h5>Enheder</h5>
+                        <div class="display-4">{{ sensors | length }}</div>
+                        <span class="badge bg-success">All Online</span>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h5>Temperatur</h5>
+                        <div class="display-4" id="avg-temp">
+                            {% set total_temp = 0 %}
+                            {% for device_id, device in sensors.items() %}
+                                {% set total_temp = total_temp + device.temperature %}
+                            {% endfor %}
+                            {{ (total_temp / sensors | length) | round(1) if sensors | length > 0 else 'N/A' }}
+                        </div>
+                        <span class="badge bg-info">°C</span>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h5>Fugtighed</h5>
+                        <div class="display-4" id="avg-humidity">
+                            {% set total_humidity = 0 %}
+                            {% for device_id, device in sensors.items() %}
+                                {% set total_humidity = total_humidity + device.humidity %}
+                            {% endfor %}
+                            {{ (total_humidity / sensors | length) | round(1) if sensors | length > 0 else 'N/A' }}
+                        </div>
+                        <span class="badge bg-info">%</span>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h5>Data Points i dag</h5>
+                        <div class="display-4" id="data-points">{{ data_points }}</div>
+                        <span class="badge bg-primary">Since 00:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <i class="fas fa-chart-area me-2"></i>Sensor Data Graphs
+            </div>
+            <div class="card-body" id="realtime-graphs">
+                <div class="mb-4">
+                    <h3>Temperature & Humidity (Last 5 Minutes)</h3>
+                    <img id="temp-humidity-graph" src="" alt="Temperature and Humidity Graph" class="img-fluid mb-4">
+                </div>
+                <div class="mb-4">
+                    <h3>Air Quality (Last 5 Minutes)</h3>
+                    <img id="air-quality-graph" src="" alt="Air Quality Graph" class="img-fluid">
+                </div>
+            </div>
+            <div class="card-body d-none" id="historical-graphs">
+                <div class="mb-4">
+                    <h3>Select Time Range</h3>
+                    <form id="historical-form">
+                        <div class="input-group mb-3">
+                            <select class="form-select" id="historical-minutes" name="minutes">
+                                <option value="60">Last 1 Hour</option>
+                                <option value="360">Last 6 Hours</option>
+                                <option value="1440">Last 24 Hours</option>
+                                <option value="10080">Last 7 Days</option>
+                            </select>
+                            <button class="btn btn-primary" type="submit">Load Historical Data</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="mb-4">
+                    <h3 id="CO2TVOC-title">CO2 and TVOC</h3>
+                    <img id="CO2TVOCgraph-historical" src="" alt="Historical CO2 TVOC graph will appear here..." class="img-fluid">
+                </div>
+                <div class="mb-4">
+                    <h3 id="temp-title">Temperature</h3>
+                    <img id="tempgraph-historical" src="" alt="Historical Temp-Graph will appear here..." class="img-fluid">
+                </div>
+                <div class="mb-4">
+                    <h3 id="air-title">Air Quality</h3>
+                    <img id="airgraph-historical" src="" alt="Historical Air-Graph will appear here..." class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const realtimeBtn = document.getElementById('realtime-btn');
+    const historicalBtn = document.getElementById('historical-btn');
+    const realtimeGraphs = document.getElementById('realtime-graphs');
+    const historicalGraphs = document.getElementById('historical-graphs');
+
+    realtimeBtn.addEventListener('click', function() {
+        this.classList.add('active');
+        historicalBtn.classList.remove('active');
+        realtimeGraphs.classList.remove('d-none');
+        historicalGraphs.classList.add('d-none');
+    });
+
+    historicalBtn.addEventListener('click', function() {
+        this.classList.add('active');
+        realtimeBtn.classList.remove('active');
+        realtimeGraphs.classList.add('d-none');
+        historicalGraphs.classList.remove('d-none');
+    });
+
+    document.getElementById('historical-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const minutes = document.getElementById('historical-minutes').value;
+        window.socket.emit('request_historical', minutes);
+    });
+
+    socket.on('temp_graph', function(data) {
+        document.getElementById('temp-humidity-graph').src = 'data:image/png;base64,' + data.image;
+    });
+
+    socket.on('air_graph', function(data) {
+        document.getElementById('air-quality-graph').src = 'data:image/png;base64,' + data.image;
+    });
+</script>
+{% endblock %}

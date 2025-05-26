@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block title %}IoT Platform - Om{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <h1 class="border-bottom pb-2">Om IoT platformen</h1>
+    </div>
+</div>
+
+<div class="row align-items-center mb-5">
+    <div class="col-md-6">
+        <h2>Projektoversigt</h2>
+        <p class="lead">
+            Denne IoT-platform blev udviklet som et førsteårsprojekt på IT-teknolog uddannelsen på Københavns
+            Erhvervsakademi for at demonstrere integrationen af indlejrede systemer og programmering.
+        </p>
+        <p>
+            Vores system indsamler data fra tre ESP32-mikrocontrollere udstyret med forskellige sensorer, og
+            behandler/visualiserer disse data på en Raspberry Pi Zero 2W og viser dem her på siden.
+        </p>
+        <p>
+            Platformen muliggør realtids-overvågning af miljøforhold og vil senere også understøtte fjernstyring af
+            enheder.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">Teknologier</h3>
+            </div>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card h-100 shadow-lg">
+                            <div class="card-body text-center">
+                                <i class="fas fa-server fa-3x mb-3 text-primary"></i>
+                                <h4>Backend</h4>
+                                <ul class="list-unstyled">
+                                    <li>Python</li>
+                                    <li>Flask</li>
+                                    <li>Socket.IO</li>
+                                    <li>Raspberry Pi OS</li>
+                                    <li>SQLite</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-lg">
+                            <div class="card-body text-center">
+                                <i class="fas fa-desktop fa-3x mb-3 text-primary"></i>
+                                <h4>Frontend</h4>
+                                <ul class="list-unstyled">
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>Flask</li>
+                                    <li>Bootstrap</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 shadow-lg">
+                            <div class="card-body text-center">
+                                <i class="fas fa-microchip fa-3x mb-3 text-primary"></i>
+                                <h4>Hardware</h4>
+                                <ul class="list-unstyled">
+                                    <li>Raspberry Pi Zero 2W</li>
+                                    <li>3 x ESP32</li>
+                                    <li>Temperatursensorer</li>
+                                    <li>Fugtighedssensorer</li>
+                                    <li>Luftkvalitetssensorer (TVOC, eCO2)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">Studiegruppe F2025 2B9</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                        <div class="card team-card h-100 shadow-lg">
+                            <div class="card-body text-center">
+                                <div class="team-avatar mb-3">
+                                    <i class="fas fa-user-circle fa-5x text-primary"></i>
+                                </div>
+                                <h4>Mehmet Altunay</h4>
+                                <p class="text-muted">Elektro musician</p>
+                                <p>Ansvarlig og dygtig</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card team-card h-100 shadow-lg">
+                            <div class="card-body text-center">
+                                <div class="team-avatar mb-3">
+                                    <i class="fas fa-user-circle fa-5x text-primary"></i>
+                                </div>
+                                <h4>Samuel Benn Sabroe</h4>
+                                <p class="text-muted">Skørt geni, som elsker dyr</p>
+                                <p>Elsker databaser</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card team-card h-100 shadow-lg">
+                            <div class="card-body text-center">
+                                <div class="team-avatar mb-3">
+                                    <i class="fas fa-user-circle fa-5x text-primary"></i>
+                                </div>
+                                <h4>Vasilije Niko Nikolic</h4>
+                                <p class="text-muted">Boomer fra 1991</p>
+                                <p>Har fået en lille datter</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card team-card h-100 shadow-lg">
+                            <div class="card-body text-center">
+                                <div class="team-avatar mb-3">
+                                    <i class="fas fa-user-circle fa-5x text-primary"></i>
+                                </div>
+                                <h4>Markus Hajdu</h4>
+                                <p class="text-muted">Fysik- og kemi ekspert</p>
+                                <p>Risiko for brændfare</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
