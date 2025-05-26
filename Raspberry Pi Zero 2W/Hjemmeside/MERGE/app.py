@@ -31,21 +31,17 @@ def init_username_db():
     conn.commit()
     conn.close()
 
-# Add a global variable to track the current timeframe in minutes (default 5)
-current_minutes = 5
-
-# Modify update_graphs to use the global variable instead of a parameter
+# Always push the last 5 min graph
 def update_graphs():
-    global current_minutes
-    graph_img = graphs.create_graph(9, minuts=current_minutes)  # Temperature (AHT)
+    graph_img = graphs.create_graph(9, minuts=5)  # Temperature (AHT)
     if graph_img:
-        socketio.emit('temp_graph', {'image': graph_img, 'minutes': current_minutes})
-    graph_img = graphs.create_graph(3, 4, minuts=current_minutes)  # TVOC & eCO2
+        socketio.emit('temp_graph', {'image': graph_img})
+    graph_img = graphs.create_graph(3, 4, minuts=5)  # TVOC & eCO2
     if graph_img:
-        socketio.emit('CO2TVOCgraph', {'image': graph_img, 'minutes': current_minutes})
-    graph_img = graphs.create_graph(4, minuts=current_minutes)  # eCO2
+        socketio.emit('CO2TVOCgraph', {'image': graph_img})
+    graph_img = graphs.create_graph(4, minuts=5)  # eCO2
     if graph_img:
-        socketio.emit('air_graph', {'image': graph_img, 'minutes': current_minutes})
+        socketio.emit('air_graph', {'image': graph_img})
 
 # Update the emit loop to simply call update_graphs using the current_minutes value.
 def emit_loop():
@@ -289,16 +285,6 @@ def handle_connect():
 @socketio.on('disconnect')
 def handle_disconnect():
     print('Client disconnected')
-
-@socketio.on('request_historical')
-def handle_historical(minutes):
-    global current_minutes
-    try:
-        current_minutes = int(minutes)
-    except ValueError:
-        current_minutes = 5
-    print(f'Requested historical graphs for {current_minutes} minutes')
-    update_graphs()
 
 if __name__ == '__main__':
     init_username_db()
