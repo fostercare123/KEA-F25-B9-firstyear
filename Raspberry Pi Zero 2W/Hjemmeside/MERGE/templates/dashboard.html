@@ -39,9 +39,6 @@
             <button type="button" class="btn btn-outline-primary active" id="realtime-btn">
                 <i class="fas fa-bolt"></i> Real-time
             </button>
-            <button type="button" class="btn btn-outline-primary" id="historical-btn">
-                <i class="fas fa-history"></i> Historical
-            </button>
         </div>
     </div>
 </div>
@@ -110,34 +107,6 @@
                 <div class="mb-4">
                     <h3>Air Quality (Last 5 Minutes)</h3>
                     <img id="airgraph" src="" alt="Air-Graph will appear here..." style="width:100%; max-width:1200px; border:3px solid #ccc;">
-                </div>
-            </div>
-            <div class="card-body d-none" id="historical-graphs">
-                <div class="mb-4">
-                    <h3>Select Time Range</h3>
-                    <form id="historical-form">
-                        <div class="input-group mb-3">
-                            <select class="form-select" id="historical-minutes" name="minutes">
-                                <option value="60">Last 1 Hour</option>
-                                <option value="360">Last 6 Hours</option>
-                                <option value="1440">Last 24 Hours</option>
-                                <option value="10080">Last 7 Days</option>
-                            </select>
-                            <button class="btn btn-primary" type="submit">Load Historical Data</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="mb-4">
-                    <h3 id="CO2TVOC-title">CO2 and TVOC</h3>
-                    <img id="CO2TVOCgraph-historical" src="" alt="Historical CO2 TVOC graph will appear here..." style="width:100%; max-width:1200px; border:3px solid #ccc;">
-                </div>
-                <div class="mb-4">
-                    <h3 id="temp-title">Temperature</h3>
-                    <img id="tempgraph-historical" src="" alt="Historical Temp-Graph will appear here..." style="width:100%; max-width:1200px; border:3px solid #ccc;">
-                </div>
-                <div class="mb-4">
-                    <h3 id="air-title">Air Quality</h3>
-                    <img id="airgraph-historical" src="" alt="Historical Air-Graph will appear here..." style="width:100%; max-width:1200px; border:3px solid #ccc;">
                 </div>
             </div>
         </div>
@@ -213,67 +182,22 @@
 
     window.socket.on('CO2TVOCgraph', function(data) {
         console.log('Received CO2TVOCgraph:', data);
-        const isHistorical = document.getElementById('historical-graphs').classList.contains('d-none') ? false : true;
-        if (isHistorical) {
-            document.getElementById('CO2TVOCgraph-historical').src = 'data:image/png;base64,' + data.image;
-            document.getElementById('CO2TVOC-title').textContent = `CO2 og TVOC (Sidste ${data.minutes} Minutter)`;
-        } else {
-            document.getElementById('CO2TVOCgraph').src = 'data:image/png;base64,' + data.image;
-        }
+        document.getElementById('CO2TVOCgraph').src = 'data:image/png;base64,' + data.image;
     });
 
     window.socket.on('temp_graph', function(data) {
         console.log('Received temp_graph:', data);
-        const isHistorical = document.getElementById('historical-graphs').classList.contains('d-none') ? false : true;
-        if (isHistorical) {
-            document.getElementById('tempgraph-historical').src = 'data:image/png;base64,' + data.image;
-            document.getElementById('temp-title').textContent = `Temperatur (Sidste ${data.minutes} Minutter)`;
-        } else {
-            document.getElementById('tempgraph').src = 'data:image/png;base64,' + data.image;
-        }
+        document.getElementById('tempgraph').src = 'data:image/png;base64,' + data.image;
     });
 
     window.socket.on('air_graph', function(data) {
         console.log('Received air_graph:', data);
-        const isHistorical = document.getElementById('historical-graphs').classList.contains('d-none') ? false : true;
-        if (isHistorical) {
-            document.getElementById('airgraph-historical').src = 'data:image/png;base64,' + data.image;
-            document.getElementById('air-title').textContent = `Luftkvalitet (Sidste ${data.minutes} Minutter)`;
-        } else {
-            document.getElementById('airgraph').src = 'data:image/png;base64,' + data.image;
-        }
+        document.getElementById('airgraph').src = 'data:image/png;base64,' + data.image;
     });
 
-    const realtimeBtn = document.getElementById('realtime-btn');
-    const historicalBtn = document.getElementById('historical-btn');
-    const realtimeGraphs = document.getElementById('realtime-graphs');
-    const historicalGraphs = document.getElementById('historical-graphs');
-
-    realtimeBtn.addEventListener('click', function() {
-        console.log('Switching to Real-Time view');
-        this.classList.add('active');
-        historicalBtn.classList.remove('active');
-        realtimeGraphs.classList.remove('d-none');
-        historicalGraphs.classList.add('d-none');
-        window.socket.emit('request_historical', 5);
-    });
-
-    historicalBtn.addEventListener('click', function() {
-        console.log('Switching to Historical view');
-        this.classList.add('active');
-        realtimeBtn.classList.remove('active');
-        realtimeGraphs.classList.add('d-none');
-        historicalGraphs.classList.remove('d-none');
-        const minutes = document.getElementById('historical-minutes').value;
-        console.log(`Requesting historical graphs for ${minutes} minutes`);
-        window.socket.emit('request_historical', minutes);
-    });
-
-    document.getElementById('historical-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const minutes = document.getElementById('historical-minutes').value;
-        console.log(`Historical form submitted, requesting ${minutes} minutes`);
-        window.socket.emit('request_historical', minutes);
+    document.getElementById('realtime-btn').addEventListener('click', function() {
+        console.log('Requesting real-time graphs');
+        window.socket.emit('request_realtime');
     });
 </script>
 {% endblock %}
