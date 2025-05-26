@@ -90,7 +90,11 @@ def fetch_all_temperatures():
     try:
         conn = sqlite3.connect("sensordata.db", check_same_thread=False)
         cursor = conn.cursor()
-        cursor.execute("SELECT esp_id, timestamp, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht FROM environment")
+        cursor.execute("""
+            SELECT esp_id, timestamp, Aqi, Tvoc, Eco2, Rhens,
+                   Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht
+              FROM environment
+        """)
         data = cursor.fetchall()
         return data
     except sqlite3.Error as e:
@@ -103,11 +107,12 @@ def fetch_temps_last_x_minutes(minutes):
     try:
         conn = sqlite3.connect("sensordata.db", check_same_thread=False)
         cursor = conn.cursor()
-        cursor.execute('''
-            SELECT esp_id, timestamp, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht 
-            FROM environment
-            WHERE timestamp >= DATETIME('now', ?)
-        ''', (f'-{minutes} minutes',))
+        cursor.execute("""
+            SELECT esp_id, timestamp, Aqi, Tvoc, Eco2, Rhens,
+                   Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht
+              FROM environment
+             WHERE timestamp >= DATETIME('now', ?)
+        """, (f'-{minutes} minutes',))
         data = cursor.fetchall()
         return data
     except sqlite3.Error as e:
@@ -116,14 +121,22 @@ def fetch_temps_last_x_minutes(minutes):
     finally:
         conn.close()
 
-def create_new_temp_reading(Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht, esp_id=1):
+def create_new_temp_reading(Aqi, Tvoc, Eco2, Rhens,
+                            Eco2rating, Tvocrating,
+                            Tempens, Tempaht, Rhaht,
+                            esp_id=1):
     try:
         conn = sqlite3.connect("sensordata.db", check_same_thread=False)
         cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO environment (esp_id, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht)
+        cursor.execute("""
+            INSERT INTO environment
+               (esp_id, Aqi, Tvoc, Eco2, Rhens,
+                Eco2rating, Tvocrating,
+                Tempens, Tempaht, Rhaht)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (esp_id, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht))
+        """, (esp_id, Aqi, Tvoc, Eco2, Rhens,
+              Eco2rating, Tvocrating,
+              Tempens, Tempaht, Rhaht))
         conn.commit()
     except sqlite3.Error as e:
         print(f"Error inserting temperature reading: {e}")
