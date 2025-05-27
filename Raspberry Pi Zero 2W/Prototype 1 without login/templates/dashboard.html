@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}IoT Platform - Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+    .sensor-card {
+        transition: transform 0.3s ease;
+    }
+    
+    .sensor-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .gauge-container {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    .sensor-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    
+    .sensor-unit {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Sensor Dashboard + Real-time knap -->
+<!-- Basically øverste linje -->
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="text-primary">Sensor Dashboard</h1>
+    <div class="dashboard-controls">
+        <div class="card">
+            <div class="card-body text-center text-primary">
+                <i class="fas fa-bolt"></i> Real-time
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Temperatur & Fugtighed's bar med live-grafer -->
+<!-- Live-Grafer med websockets -->
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <i class="fas fa-chart-area me-2"></i>Temperatur & Fugtighed
+            </div>
+            <div class="card-body" id="realtime-graphs">
+                <div class="mb-4">
+                    <h3>CO2 and TVOC</h3>
+                    <img id="CO2TVOCgraph" src="" alt="CO2 TVOC graph will appear here..." style="width:100%; max-width:1200px; border:3px solid #ccc;">
+                </div>
+                <div class="mb-4">
+                    <h3>Temperature</h3>
+                    <img id="tempgraph" src="" alt="Temp-Graph will appear here..." style="width:100%; max-width:1200px; border:3px solid #ccc;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("DOM fully loaded. Initializing socket connection...");
+        var socket = io();
+
+        socket.on('connect', function() {
+            console.log("Socket connected");
+        });
+
+        socket.on('CO2TVOCgraph', function(data) {
+            console.log("Received CO2TVOCgraph");
+            document.getElementById('CO2TVOCgraph').src = 'data:image/png;base64,' + data.image;
+        });
+
+        socket.on('temp_graph', function(data) {
+            console.log("Received temp_graph");
+            document.getElementById('tempgraph').src = 'data:image/png;base64,' + data.image;
+        });
+    });
+</script>
+{% endblock %}
