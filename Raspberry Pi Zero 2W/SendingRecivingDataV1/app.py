@@ -45,22 +45,12 @@ def emit_loop():
 @app.route('/send', methods=['POST'])
 def receive_data():
     data = request.get_json()
-    print("Received from ESP32:")
-    print("This is the raw data that was sent:")
+    print("---------- New Post Request ----------")
+    print(f"This is of datatype: {type(data)} .Raw data that was sent:")
     # create_new_employee(name, tagid, salary, otlimit, otform)
     # DB.create_new_employee("Bo", "0x53fcc401", 200, 5, 100)
     # Check to see if UID match anyone in the DB
     print(data)
-    print("---- Data Type ----")
-    print(type(data))
-
-    # print(DB.convert_uid_to_name(uid))
-    # {'ID': 1, 'Aqi': 1, 'Tvoc': 56, 'Eco2': 469, 'Rh_ens': 0.1953125, 'Eco2_rating': 'Excellent - Target level', 'Tvoc_rating': 'Good', 'Temp_ens': 276.0063, 'Temp_aht': 26.16, 'Rh_aht': 40.26, 'ERRORS': 0}
-
-    # Function to create graph
-    # (id, timestamp, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht)
-    #  0 , 1        , 2  , 3   , 4   , 5    , 6         , 7         , 8      , 9      , 10
-    # Send back a simple response
     
     if data['ERRORS'] != 0:
         ''' machine, errortype, erroramount, errormessage '''
@@ -78,7 +68,7 @@ def receive_data():
         DB.create_new_temp_reading(data['Aqi'], data['Tvoc'], data['Eco2'], data['Rh_ens'], data['Eco2_rating'], data['Tvoc_rating'], data['Temp_ens'], data['Temp_aht'], data['Rh_aht'])
         response = "Hello ESP 1"
     elif data['ID'] == 2: # ID = 1, New Temp Reading
-        print("New Temp reading recived from ESP-2")
+        print("New Ventilation Call from ESP-2")
         aqi = DB.fetch_latest_AQI()
         if aqi <= 2:
             motor_on = 0
@@ -89,11 +79,10 @@ def receive_data():
             'Retry' : 0,
             'motor_on' : motor_on
         }
-        print("ESP 2 RESPONSE")
-        print(response)
     
     else:
-        response = {"message": "Hello ESP32, got your value: " + str(data)}
+        response = {"message": "Hello ESP32, got your value, but did not do anything with it: " + str(data)}
+    print(f"This is the data that was returned to ESP32: {response}")
     return jsonify(response)
 
 if __name__ == '__main__':
