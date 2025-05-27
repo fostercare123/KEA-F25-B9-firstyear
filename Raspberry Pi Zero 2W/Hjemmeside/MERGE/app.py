@@ -116,9 +116,7 @@ def indstillinger():
 @app.route('/send', methods=['POST'])
 def receive_data():
     data = request.get_json()
-    print("Received from ESP32:", data)
     if 'ID' in data:
-        print(f"New Temp reading received from ESP-{data['ID']}")
         DB.create_new_temp_reading(
             data['Aqi'], data['Tvoc'], data['Eco2'], data['Rh_ens'],
             data['Eco2_rating'], data['Tvoc_rating'], data['Temp_ens'],
@@ -287,5 +285,10 @@ def handle_disconnect():
     print('Client disconnected')
 
 if __name__ == '__main__':
+<<<<<<< Updated upstream
+=======
+    init_username_db()   # recreate users table
+    DB.init_db()         # recreate example.db tables
+>>>>>>> Stashed changes
     threading.Thread(target=emit_loop, daemon=True).start()
     socketio.run(app, host='0.0.0.0', debug=True)
