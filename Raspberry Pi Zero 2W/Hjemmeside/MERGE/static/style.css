@@ -35,3 +35,8 @@
 .navbar-custom .nav-link:hover {
     color: #e0f7f4 !important;
 }
+
+/* Match footer baggrund til navbar farven */
+footer.footer {
+    background-color: #98A9A4 !important;
+}
