@@ -3,6 +3,7 @@
 
 body {
     font-family: 'Lato', sans-serif;
+    background-color: #FAFAF5;
 }
 
 .card-status {
@@ -13,12 +14,7 @@ body {
     height: 10px;
     border-radius: 50%;
 }
-.card-status.online {
-    background-color: green;
-}
-.card-status.offline {
-    background-color: red;
-}
+
 .team-card {
     transition: transform 0.3s ease;
 }
