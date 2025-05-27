@@ -286,6 +286,11 @@ def handle_disconnect():
 
 if __name__ == '__main__':
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+    init_username_db()   # recreate users table
+    DB.init_db()         # recreate example.db tables
+>>>>>>> Stashed changes
 =======
     init_username_db()   # recreate users table
     DB.init_db()         # recreate example.db tables
