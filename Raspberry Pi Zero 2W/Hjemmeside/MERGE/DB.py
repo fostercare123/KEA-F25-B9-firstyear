@@ -49,6 +49,7 @@ cursor.execute('''
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS environment (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        esp_id INTEGER NOT NULL DEFAULT 0,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         Aqi REAL,
         Tvoc REAL,
@@ -61,8 +62,13 @@ cursor.execute('''
         Rhaht REAL
     )
 ''')
+# Migrate old table: add esp_id if missing
+cursor.execute("PRAGMA table_info(environment)")
+cols = [row[1] for row in cursor.fetchall()]
+if 'esp_id' not in cols:
+    cursor.execute("ALTER TABLE environment ADD COLUMN esp_id INTEGER NOT NULL DEFAULT 0")
+
 # Api Tvoc Eco2 Rhens Eco2rating Tvocrating Tempens Tempaht Rhaht
-# Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht
 
 
 
@@ -89,6 +95,7 @@ cursor.execute('''
 ''')
 
 
+conn.commit()
 conn.close() #THIS BIT LAST!!!
 
 # ESP 2 funtions
@@ -179,8 +186,8 @@ def fetch_temps_last_x_minutes(minutes):
 #                                                             #
 
 
-# Function to insert a new temp reading with automatic timestamp
-def create_new_temp_reading(Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht):
+# Function to insert a new temp reading with automatic timestamp and esp_id
+def create_new_temp_reading(Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht, esp_id=0):
     # Connect to the database
     # conn = sqlite3.connect("example.db")
     conn = sqlite3.connect("example.db", check_same_thread=False)
@@ -189,9 +196,13 @@ def create_new_temp_reading(Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Temp
     Aqi Tvoc Eco2 Rhens Eco2rating Tvocrating Tempens Tempaht Rhaht
     '''
     cursor.execute('''
-        INSERT INTO environment (Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht))
+        INSERT INTO environment (
+            esp_id, Aqi, Tvoc, Eco2, Rhens,
+            Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (esp_id, Aqi, Tvoc, Eco2, Rhens,
+          Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht))
     conn.commit()
     conn.close()
 

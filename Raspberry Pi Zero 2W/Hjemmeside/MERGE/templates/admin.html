@@ -9,6 +9,9 @@
 </head>
 
 <body>
+    {% extends 'base.html' %}
+    {% block title %}Admin{% endblock %}
+    {% block content %}
     <h1>Brugerstyring</h1>
 
     <h2>Tilføj ny bruger</h2>
@@ -22,32 +25,38 @@
         <button type="submit">Tilføj</button>
     </form>
 
-
-
-
-<h2>Eksisterende brugere</h2>
-<table border="1">
-    <tr>
-        <th>ID</th><th>Brugernavn</th><th>Rolle</th><th>Handlinger</th><th>Gemme</th>
-    </tr>
-    {% for bruger in brugere %}
-    <tr>
-        <form method="POST" action="{{ url_for('edit_user', user_id=bruger[0]) }}">
-            <td>{{ bruger[0] }}</td>
-            <td><input name="username" value="{{ bruger[1] }}"></td>
-            <td><input name="password" value="{{ bruger[2] }}"></td>
-            <td>
-                <select name="role">
-                    <option value="admin" {% if bruger[3] == 'admin' %}selected{% endif %}>Admin</option>
-                    <option value="bruger" {% if bruger[3] == 'bruger' %}selected{% endif %}>Bruger</option>
-                </select>
-                
-            </td>
-            <td>
-                <button type="submit">Opdater</button>
-                <a href="{{ url_for('delete_user', user_id=bruger[0]) }}">Slet</a>
-            </td>
-        </form>
-    </tr>
+    <h2>Eksisterende brugere</h2>
+    <table class="table">
+      <thead><tr><th>ID</th><th>Brugernavn</th><th>Rolle</th><th>Handlinger</th></tr></thead>
+      <tbody>
+      {% for u in brugere %}
+        <tr>
+          <td>{{ u[0] }}</td><td>{{ u[1] }}</td><td>{{ u[2] }}</td>
+          <td>
+            <form method="post" action="{{ url_for('edit_user', user_id=u[0]) }}" class="d-inline">
+              <input name="username" value="{{ u[1] }}" hidden>
+              <input name="password" value="" hidden>
+              <input name="role" value="{{ u[2] }}" hidden>
+              <button class="btn btn-sm btn-warning">Rediger</button>
+            </form>
+            <a href="{{ url_for('delete_user', user_id=u[0]) }}" class="btn btn-sm btn-danger">Slet</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <h4>Tilføj ny bruger</h4>
+    <form method="post" action="{{ url_for('add_user') }}" class="row g-2">
+      <div class="col"><input name="username" placeholder="Brugernavn" class="form-control"></div>
+      <div class="col"><input name="password" placeholder="Adgangskode" class="form-control"></div>
+      <div class="col">
+        <select name="role" class="form-select">
+          <option value="admin">admin</option>
+          <option value="bruger">bruger</option>
+        </select>
+      </div>
+      <div class="col"><button class="btn btn-success">Tilføj</button></div>
+    </form>
     {% endblock %}
-</table>
+</body>
+</html>

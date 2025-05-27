@@ -1,101 +1,305 @@
-import DB # All DB-related things go here!
-import graphs # Graph stuff goes here
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session
+from flask_socketio import SocketIO, emit
+import sqlite3
 import threading
-import base64 # Graphs and graphics
-
-
-from flask import Flask, request, jsonify, render_template
-from flask_socketio import SocketIO # Websockets
-
-from io import BytesIO # Graphs and stuff
-
+import DB
+import graphs
 from time import sleep
+from datetime import datetime
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your-secret-key'
 socketio = SocketIO(app)
 
+def init_username_db():
+    conn = sqlite3.connect('username.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            password TEXT NOT NULL,
+            role TEXT NOT NULL
+        )
+    ''')
+    cursor.execute("SELECT * FROM users WHERE username = 'admin'")
+    if not cursor.fetchone():
+        cursor.execute("INSERT INTO users (username, password, role) VALUES ('admin', '1234', 'admin')")
+        cursor.execute("INSERT INTO users (username, password, role) VALUES ('bruger1', 'abcd', 'bruger')")
+        cursor.execute("INSERT INTO users (username, password, role) VALUES ('bruger2', 'abcd', 'bruger')")
+        cursor.execute("INSERT INTO users (username, password, role) VALUES ('admin2', 'abcd', 'admin')")
+    conn.commit()
+    conn.close()
 
-# Webpage / Homepage route
-@app.route('/')
-def index():
-    return render_template('index.html')
+# Add a global variable to track the current timeframe in minutes (default 5)
+current_minutes = 5
 
-
-
-# 
-# Important stuff, dont touch.....
-# 
-
-# Emit loop, that updates the graphs every 5 seconds
+# Modify update_graphs to use the global variable instead of a parameter
 def update_graphs():
-    # Temp Graph
-    graph_img = graphs.create_graph(9,10, 90) #See graph.datanames for explanation
+    global current_minutes
+    graph_img = graphs.create_graph(9, minuts=current_minutes)  # Temperature (AHT)
     if graph_img:
-        socketio.emit('temp_graph', {'image': graph_img})
-    # Air Graph
-    graph_img = graphs.create_graph(3,4, 90) #See graph.datanames for explanation
+        socketio.emit('temp_graph', {'image': graph_img, 'minutes': current_minutes})
+    graph_img = graphs.create_graph(3, 4, minuts=current_minutes)  # TVOC & eCO2
     if graph_img:
-        socketio.emit('CO2TVOCgraph', {'image': graph_img}) 
+        socketio.emit('CO2TVOCgraph', {'image': graph_img, 'minutes': current_minutes})
+    graph_img = graphs.create_graph(4, minuts=current_minutes)  # eCO2
+    if graph_img:
+        socketio.emit('air_graph', {'image': graph_img, 'minutes': current_minutes})
+
+# Update the emit loop to simply call update_graphs using the current_minutes value.
 def emit_loop():
-    while True: 
+    while True:
         update_graphs()
         sleep(4)
 
+@app.route('/')
+def index():
+    conn = sqlite3.connect('example.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT esp_id, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht, timestamp
+        FROM environment
+        WHERE timestamp = (SELECT MAX(timestamp) FROM environment WHERE esp_id = environment.esp_id)
+    ''')
+    data = cursor.fetchall()
+    conn.close()
+    sensors = {}
+    current_time = datetime.now()
+    for row in data:
+        esp_id = f'esp32_{row[0]}'
+        timestamp = datetime.fromisoformat(row[10].replace(' ', 'T'))
+        status = 'online' if (current_time - timestamp).total_seconds() < 60 else 'offline'
+        sensors[esp_id] = {
+            'name': f'ESP32-{row[0]}',
+            'temperature': row[8],  # Temp_aht
+            'humidity': row[9],     # Rh_aht
+            'status': status
+        }
+    return render_template('index.html', sensors=sensors)
+
+@app.route('/dashboard')
+def dashboard():
+    conn = sqlite3.connect('example.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT esp_id, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht, timestamp
+        FROM environment
+        WHERE timestamp = (SELECT MAX(timestamp) FROM environment WHERE esp_id = environment.esp_id)
+    ''')
+    data = cursor.fetchall()
+    cursor.execute('''
+        SELECT COUNT(*) 
+        FROM environment 
+        WHERE DATE(timestamp) = DATE('now')
+    ''')
+    data_points = cursor.fetchone()[0]
+    conn.close()
+    sensors = {}
+    current_time = datetime.now()
+    for row in data:
+        esp_id = f'esp32_{row[0]}'
+        timestamp = datetime.fromisoformat(row[10].replace(' ', 'T'))
+        status = 'online' if (current_time - timestamp).total_seconds() < 60 else 'offline'
+        sensors[esp_id] = {
+            'name': f'ESP32-{row[0]}',
+            'temperature': row[8],
+            'humidity': row[9],
+            'status': status
+        }
+    return render_template('dashboard.html', sensors=sensors, data_points=data_points)
+
+@app.route('/om')
+def om():
+    return render_template('om.html')
+
+@app.route('/indstillinger')
+def indstillinger():
+    return render_template('indstillinger.html')
 
 @app.route('/send', methods=['POST'])
 def receive_data():
     data = request.get_json()
-    print("Received from ESP32:")
-    print("This is the raw data that was sent:")
-    # create_new_employee(name, tagid, salary, otlimit, otform)
-    # DB.create_new_employee("Bo", "0x53fcc401", 200, 5, 100)
-    # Check to see if UID match anyone in the DB
-    print(data)
-    print("---- Data Type ----")
-    print(type(data))
-
-    # print(DB.convert_uid_to_name(uid))
-    # {'ID': 1, 'Aqi': 1, 'Tvoc': 56, 'Eco2': 469, 'Rh_ens': 0.1953125, 'Eco2_rating': 'Excellent - Target level', 'Tvoc_rating': 'Good', 'Temp_ens': 276.0063, 'Temp_aht': 26.16, 'Rh_aht': 40.26, 'ERRORS': 0}
-
-    # Function to create graph
-    # (id, timestamp, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht)
-    #  0 , 1        , 2  , 3   , 4   , 5    , 6         , 7         , 8      , 9      , 10
-    # Send back a simple response
-    
-    if data['ERRORS'] != 0:
-        ''' machine, errortype, erroramount, errormessage '''
-        error_type = "Unknown"
-        if data['ID'] == 0 or data['ID'] == 1 or data['ID'] == 2:
-            error_type = "Perhaps issues with sending a message"
-        DB.report_error(data['ID'],error_type, data['ERRORS'], "Make sure WiFi connection is strong")
-    if data['ID'] == 0: # ID = 0, New UID tag recived. Managening employee sessions
-        response = DB.sessionupdate(DB.convert_uid_to_name(data['UID']))
-        print("New UID reading recived from ESP-0")
-        response["ID"] = 0
-        response["Retry"] = 0
-    elif data['ID'] == 1: # ID = 1, New Temp Reading
-        print("New Temp reading recived from ESP-1")
-        DB.create_new_temp_reading(data['Aqi'], data['Tvoc'], data['Eco2'], data['Rh_ens'], data['Eco2_rating'], data['Tvoc_rating'], data['Temp_ens'], data['Temp_aht'], data['Rh_aht'])
-        response = "Hello ESP 1"
-    elif data['ID'] == 2: # ID = 1, New Temp Reading
-        print("New Temp reading recived from ESP-2")
-        aqi = DB.fetch_latest_AQI()
-        if aqi <= 2:
-            motor_on = 0
-        else:
-            motor_on = 1
-        response = {
-            'ID' : 2,
-            'Retry' : 0,
-            'motor_on' : motor_on
-        }
-        print("ESP 2 RESPONSE")
-        print(response)
-    
-    else:
-        response = {"message": "Hello ESP32, got your value: " + str(data)}
+    print("Received from ESP32:", data)
+    if 'ID' in data:
+        print(f"New Temp reading received from ESP-{data['ID']}")
+        DB.create_new_temp_reading(
+            data['Aqi'], data['Tvoc'], data['Eco2'], data['Rh_ens'],
+            data['Eco2_rating'], data['Tvoc_rating'], data['Temp_ens'],
+            data['Temp_aht'], data['Rh_aht'], esp_id=data['ID']
+        )
+        conn = sqlite3.connect('example.db')
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT esp_id, Tempaht, Rhaht, timestamp
+            FROM environment
+            WHERE timestamp = (SELECT MAX(timestamp) FROM environment WHERE esp_id = environment.esp_id)
+        ''')
+        sensor_data = cursor.fetchall()
+        conn.close()
+        sensors = {}
+        current_time = datetime.now()
+        for row in sensor_data:
+            esp_id = f'esp32_{row[0]}'
+            timestamp = datetime.fromisoformat(row[3].replace(' ', 'T'))
+            status = 'online' if (current_time - timestamp).total_seconds() < 60 else 'offline'
+            sensors[esp_id] = {
+                'name': f'ESP32-{row[0]}',
+                'temperature': row[1],
+                'humidity': row[2],
+                'status': status
+            }
+        socketio.emit('sensor_update', sensors)
+    response = {"message": f"Hello ESP32, got your value: {data}"}
     return jsonify(response)
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['uname']
+        password = request.form['psw']
+        conn = sqlite3.connect('username.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT role FROM users WHERE username=? AND password=?", (username, password))
+        user = cursor.fetchone()
+        conn.close()
+        if user:
+            session['username'] = username
+            session['role'] = user[0]
+            if user[0] == 'admin':
+                return redirect(url_for('admin'))
+            else:
+                return redirect(url_for('vis_brugere'))
+        else:
+            return redirect(url_for('login'))
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
+
+@app.route('/admin', methods=['GET'])
+def admin():
+    conn = sqlite3.connect('username.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, username, role FROM users")
+    brugere = cursor.fetchall()
+    conn.close()
+    return render_template('admin.html', brugere=brugere)
+
+@app.route('/add_user', methods=['POST'])
+def add_user():
+    username = request.form['username']
+    password = request.form['password']
+    role = request.form['role']
+    conn = sqlite3.connect('username.db')
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", (username, password, role))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin'))
+
+@app.route('/edit_user/<int:user_id>', methods=['POST'])
+def edit_user(user_id):
+    username = request.form['username']
+    password = request.form['password']
+    role = request.form['role']
+    conn = sqlite3.connect('username.db')
+    cursor = conn.cursor()
+    cursor.execute("UPDATE users SET username = ?, password = ?, role = ? WHERE id = ?", (username, password, role, user_id))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin'))
+
+@app.route('/delete_user/<int:user_id>')
+def delete_user(user_id):
+    conn = sqlite3.connect('username.db')
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM users WHERE id = ?", (user_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin'))
+
+@app.route('/brugere')
+def vis_brugere():
+    conn = sqlite3.connect('username.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, username, password, role FROM users")
+    brugere = cursor.fetchall()
+    conn.close()
+    username = session.get('username')
+    if not username:
+        return redirect(url_for('login'))
+    conn2 = sqlite3.connect('example.db')
+    cursor2 = conn2.cursor()
+    cursor2.execute('''
+        SELECT DATE(starttimestamp) AS dato, SUM(paid) AS salary
+        FROM sessions
+        WHERE name = ?
+        GROUP BY DATE(starttimestamp)
+        ORDER BY dato DESC
+        LIMIT 50
+    ''', (username,))
+    data = cursor2.fetchall()
+    conn2.close()
+    return render_template('brugere.html', brugere=brugere, data=data)
+
+@app.route('/add_employee', methods=['POST'])
+def add_employee():
+    name = request.form['name']
+    tagid = request.form['tagid']
+    salary = float(request.form['salary'])
+    otlimit = float(request.form['otlimit'])
+    otform = float(request.form['otform'])
+    DB.create_new_employee(name, tagid, salary, otlimit, otform)
+    return redirect(url_for('admin'))
+
+@app.route('/session_update/<name>', methods=['POST'])
+def session_update(name):
+    DB.sessionupdate(name)
+    return redirect(url_for('admin'))
+
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected')
+    conn = sqlite3.connect('example.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT esp_id, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht, timestamp
+        FROM environment
+        WHERE timestamp = (SELECT MAX(timestamp) FROM environment WHERE esp_id = environment.esp_id)
+    ''')
+    data = cursor.fetchall()
+    conn.close()
+    sensors = {}
+    current_time = datetime.now()
+    for row in data:
+        esp_id = f'esp32_{row[0]}'
+        timestamp = datetime.fromisoformat(row[10].replace(' ', 'T'))
+        status = 'online' if (current_time - timestamp).total_seconds() < 60 else 'offline'
+        sensors[esp_id] = {
+            'name': f'ESP32-{row[0]}',
+            'temperature': row[8],
+            'humidity': row[9],
+            'status': status
+        }
+    emit('sensor_update', sensors)
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('Client disconnected')
+
+@socketio.on('request_historical')
+def handle_historical(minutes):
+    global current_minutes
+    try:
+        current_minutes = int(minutes)
+    except ValueError:
+        current_minutes = 5
+    print(f'Requested historical graphs for {current_minutes} minutes')
+    update_graphs()
+
 if __name__ == '__main__':
-    threading.Thread(target=emit_loop, daemon=True).start() #Starts Sensor Loop with threading enabled
-    socketio.run(app, host='0.0.0.0', port=5000)
+    threading.Thread(target=emit_loop, daemon=True).start()
+    socketio.run(app, host='0.0.0.0', debug=True)
