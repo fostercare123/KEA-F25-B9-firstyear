@@ -44,24 +44,28 @@ def threaded_request(data):
     except Exception as e:
         response_data = f"Error: {e}"
     request_done = True
-def com_raspi(data_to_send, timeout=5):
+def com_raspi(data_to_send, timeout=1):
     global request_done, response_data
     request_done = False
     response_data = None
     # Starting function in own thread, to make sure it dosent freeze up the whole ESP
     _thread.start_new_thread(threaded_request, (data_to_send,))
-    start = time.ticks_ms() #Basic non-blocking delay
+    start = ticks_ms()
     while not request_done:
-        # Clock to check how long the process has been running.
-        # Converting Seconds to MS to compare to ticks_ms
-        if time.ticks_diff(time.ticks_ms(), start) > timeout * 1000:
+        if ticks_diff(ticks_ms(), start) > timeout * 1000:
             print("Request timed out")
+            print("Tried to send:")
+            print(data_to_send)
+            global retries
+            retries += 1 # This is how many times the ESP has tried to send. Should be 0
             return None
-        time.sleep(0.1) # Idk, im just kind to the ESP
-    time_to_respond = (ticks_ms() - start) / 1000 # Response time calc.
-    print("Response took:", time_to_respond, "seconds") 
+        sleep(0.1) # No need to overload the ESP
+    # Clock to check how long the process has been running.
+    # Converting Seconds to MS to compare to ticks_ms
+    print("Response took:", (ticks_ms() - start) / 1000, "seconds")
+    global retries # Making sure retries is acceseble outside this function
+    retries = 0    # Resetting retries, as now the http request has been successfully acknowledged
     return response_data
-
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
 #																											#
 # From here and up, data is sent to the Raspiberry Pi. All code under this can be safly deleted             #
@@ -97,10 +101,11 @@ while True: #ONLY HANDELING THE TAG SCANNER!
                         reader.stop_crypto1()
                         # Own things thats not part of the example
                         print(f"Sending UID: {uid_str}")
+                        global retries
                         my_dict = {
                             "UID": uid_str,
                             "ID": 0,
-                            "ERRORS": 0
+                            "ERRORS": retries
                         }
                         received = com_raspi(my_dict)
                         print("Received:", received)
