@@ -1,3 +1,10 @@
+/* 1) Import Lato fonten og bruger den på hele siden */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
 .card-status {
     position: absolute;
     top: 10px;
