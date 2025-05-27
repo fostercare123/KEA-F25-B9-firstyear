@@ -1,0 +1,17 @@
+I den her kode er der to sqligt databaser. username.db og example.db
+
+username.db er til et loging system. med to roller admin og bruger
+
+example.db er den tilsente data fra esp32  
+
+
+admin siden ser alle username fra database for det er gemt og kan ændre i være ad dem og tilføje og fjeren users.
+
+brugeren ser en side med en tabel der viser hver time de har arbejdet hvor meget de har tjent og om de er ankommet på arbejde.
+
+hvis man logind med en bruger som ikke er i username.db og example.db bliver der ikke vise noget data
+
+i navar er der blivet tilføjet en logind knap
+brugere er hvad du ser hvis du er logetind og har rollen bruger
+
+admin er hvad du ser hvis du er logetind og har rollen admin

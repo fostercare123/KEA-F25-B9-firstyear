@@ -62,7 +62,7 @@
                     <div class="col-md-3 text-center">
                         <h5>Temperatur</h5>
                         <div class="display-4" id="avg-temp">
-                           {{ ((sensors.esp32_1.temperature + sensors.esp32_2.temperature + sensors.esp32_3.temperature) / 3) | round(1) }}
+                            {{ (sensors.esp32_1.temperature + sensors.esp32_2.temperature + sensors.esp32_3.temperature) / 3 | round(1) }}
                         </div>
                         <span class="badge bg-info">°C</span>
                     </div>
