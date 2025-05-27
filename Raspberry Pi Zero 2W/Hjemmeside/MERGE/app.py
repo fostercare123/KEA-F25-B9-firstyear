@@ -51,7 +51,7 @@ def emit_loop():
 
 @app.route('/')
 def index():
-    conn = sqlite3.connect('sensordata.db')
+    conn = sqlite3.connect('example.db')
     cursor = conn.cursor()
     cursor.execute('''
         SELECT esp_id, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht, timestamp
@@ -76,7 +76,7 @@ def index():
 
 @app.route('/dashboard')
 def dashboard():
-    conn = sqlite3.connect('sensordata.db')
+    conn = sqlite3.connect('example.db')
     cursor = conn.cursor()
     cursor.execute('''
         SELECT esp_id, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht, timestamp
@@ -124,7 +124,7 @@ def receive_data():
             data['Eco2_rating'], data['Tvoc_rating'], data['Temp_ens'],
             data['Temp_aht'], data['Rh_aht'], esp_id=data['ID']
         )
-        conn = sqlite3.connect('sensordata.db')
+        conn = sqlite3.connect('example.db')
         cursor = conn.cursor()
         cursor.execute('''
             SELECT esp_id, Tempaht, Rhaht, timestamp
@@ -227,7 +227,7 @@ def vis_brugere():
     username = session.get('username')
     if not username:
         return redirect(url_for('login'))
-    conn2 = sqlite3.connect('sensordata.db')
+    conn2 = sqlite3.connect('example.db')
     cursor2 = conn2.cursor()
     cursor2.execute('''
         SELECT DATE(starttimestamp) AS dato, SUM(paid) AS salary
@@ -259,7 +259,7 @@ def session_update(name):
 @socketio.on('connect')
 def handle_connect():
     print('Client connected')
-    conn = sqlite3.connect('sensordata.db')
+    conn = sqlite3.connect('example.db')
     cursor = conn.cursor()
     cursor.execute('''
         SELECT esp_id, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht, timestamp
@@ -287,7 +287,5 @@ def handle_disconnect():
     print('Client disconnected')
 
 if __name__ == '__main__':
-    init_username_db()
-    DB.init_db()
     threading.Thread(target=emit_loop, daemon=True).start()
     socketio.run(app, host='0.0.0.0', debug=True)
