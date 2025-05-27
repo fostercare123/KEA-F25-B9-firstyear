@@ -23,3 +23,15 @@
     justify-content: center;
     align-items: center;
 }
+
+/* Custom turquoise navbar */
+.navbar-custom {
+    background-color: #98A9A4 !important;
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: #fff !important;
+}
+.navbar-custom .nav-link:hover {
+    color: #e0f7f4 !important;
+}
