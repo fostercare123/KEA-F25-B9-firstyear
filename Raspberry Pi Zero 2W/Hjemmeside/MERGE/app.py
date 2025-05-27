@@ -59,34 +59,7 @@ def index():
 
 @app.route('/dashboard')
 def dashboard():
-    conn = sqlite3.connect('example.db')
-    cursor = conn.cursor()
-    cursor.execute('''
-        SELECT esp_id, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht, timestamp
-        FROM environment
-        WHERE timestamp = (SELECT MAX(timestamp) FROM environment WHERE esp_id = environment.esp_id)
-    ''')
-    data = cursor.fetchall()
-    cursor.execute('''
-        SELECT COUNT(*) 
-        FROM environment 
-        WHERE DATE(timestamp) = DATE('now')
-    ''')
-    data_points = cursor.fetchone()[0]
-    conn.close()
-    sensors = {}
-    current_time = datetime.now()
-    for row in data:
-        esp_id = f'esp32_{row[0]}'
-        timestamp = datetime.fromisoformat(row[10].replace(' ', 'T'))
-        status = 'online' if (current_time - timestamp).total_seconds() < 60 else 'offline'
-        sensors[esp_id] = {
-            'name': f'ESP32-{row[0]}',
-            'temperature': row[8],
-            'humidity': row[9],
-            'status': status
-        }
-    return render_template('dashboard.html', sensors=sensors, data_points=data_points)
+    return render_template('dashboard.html')
 
 @app.route('/om')
 def om():
