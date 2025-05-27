@@ -22,8 +22,8 @@ datanames = {
 }
 
 def create_graph(datarow, datarow2 = 0, minuts = 5):
-    print("----------------------------------")
-    print(f"Create Graph Function is running")
+    #print("----------------------------------")
+    #print(f"Create Graph Function is running")
     # Fetch recent data from database
     recent_data = DB.fetch_temps_last_x_minutes(minuts)
     # This ^ function returns a list of all types of readings the last x minuttes
@@ -43,7 +43,7 @@ def create_graph(datarow, datarow2 = 0, minuts = 5):
     #  17:59:30'
     
     times = [row[1][-8:] for row in recent_data]  # Only show HH:MM:SS
-    print(times)
+    # print(times)
     # Row[3] says that we want the forth element:
     # (id, temperature, humidity, earthhumidity, timestamp)
     # datarow is the data to be extrated from our recent_data pull from DB
@@ -83,5 +83,5 @@ def create_graph(datarow, datarow2 = 0, minuts = 5):
     image_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
     #print(f"Trying to print image - Hoping for the best...")
     #print(image_base64)
-    print("----------------------------------")
+    #print("----------------------------------")
     return image_base64

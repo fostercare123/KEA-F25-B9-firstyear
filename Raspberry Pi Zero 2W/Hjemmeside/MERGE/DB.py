@@ -1,13 +1,17 @@
 import sqlite3
+import time
 from datetime import datetime, timezone
 
-def init_db():
-    """Create database and tables if they don't exist."""
-    conn = sqlite3.connect("example.db", check_same_thread=False)
-    cursor = conn.cursor()
 
-    # MAIN
-    cursor.execute('''CREATE TABLE IF NOT EXISTS main (
+### Database
+conn = sqlite3.connect("example.db", check_same_thread=False)
+cursor = conn.cursor()
+
+### MAIN
+
+
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS main (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT UNIQUE NOT NULL,
         tagid TEXT NOT NULL,
@@ -15,10 +19,13 @@ def init_db():
         otlimit REAL NOT NULL,
         otform REAL NOT NULL,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-    )''')
+    )
+''')
 
-    # SESSIONS
-    cursor.execute('''CREATE TABLE IF NOT EXISTS sessions (
+
+### SESSIONS
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS sessions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         starttimestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -29,12 +36,19 @@ def init_db():
         otform REAL NOT NULL,
         paid REAL,
         notes TEXT
-    )''')
+    )
+''')
 
-    # ENVIRONMENT
-    cursor.execute('''CREATE TABLE IF NOT EXISTS environment (
+### environment
+# Example
+# {'ID': 1, 'Aqi': 2, 'Tvoc': 73, 'Eco2': 502, 'Rh_ens': 0.1953125,
+#  'Eco2_rating': 'Excellent - Target level', 'Tvoc_rating': 'Good',
+#  'Temp_ens': 276.0063, 'Temp_aht': 25.67, 'Rh_aht': 40.45, 'ERRORS': 0}
+# 
+
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS environment (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        esp_id INTEGER NOT NULL,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         Aqi REAL,
         Tvoc REAL,
@@ -45,27 +59,37 @@ def init_db():
         Tempens REAL,
         Tempaht REAL,
         Rhaht REAL
-    )''')
+    )
+''')
+# Api Tvoc Eco2 Rhens Eco2rating Tvocrating Tempens Tempaht Rhaht
+# Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht
 
-    # ERRORS
-    cursor.execute('''CREATE TABLE IF NOT EXISTS errors (
+
+
+### Errors table!
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS errors (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         machine TEXT,
         errortype TEXT,
         erroramount REAL,
         errormessage TEXT
-    )''')
+    )
+''')
 
-    # UNALLOCATEDTAGS
-    cursor.execute('''CREATE TABLE IF NOT EXISTS unallocatedtags (
+
+### Empty tags table! unallocatedtags
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS unallocatedtags (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         UID TEXT
-    )''')
+    )
+''')
 
-    conn.commit()
-    conn.close()
+
+conn.close() #THIS BIT LAST!!!
 
 # ESP 2 funtions
 
