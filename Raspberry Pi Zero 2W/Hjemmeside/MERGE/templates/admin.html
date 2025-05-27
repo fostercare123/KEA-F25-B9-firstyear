@@ -1,53 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title> <!-- Added page title -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</head>
+{% extends 'base.html' %}
 
-<body>
-    <h1>Brugerstyring</h1>
+{% block title %}IoT Platform - Brugerstyring{% endblock %}
 
-    <h2>Tilføj ny bruger</h2>
-    <form method="POST" action="{{ url_for('add_user') }}">
-        <input type="text" name="username" placeholder="Brugernavn" required>
-        <input type="text" name="password" placeholder="Adgangskode" required>
-        <select name="role">
-            <option value="admin">Admin</option>
-            <option value="bruger">Bruger</option>
-        </select>
-        <button type="submit">Tilføj</button>
-    </form>
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Brugerstyring</h1>
 
+    <!-- Tilføj ny bruger -->
+    <div class="card mb-5">
+        <div class="card-header bg-primary text-white">
+            <i class="fas fa-user-plus me-2"></i>Tilføj ny bruger
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('add_user') }}">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <input type="text" name="username" class="form-control" placeholder="Brugernavn" required>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="password" class="form-control" placeholder="Adgangskode" required>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="role" class="form-select">
+                            <option value="admin">Admin</option>
+                            <option value="bruger">Bruger</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1 d-grid">
+                        <button type="submit" class="btn btn-success">Tilføj</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
-
-
-<h2>Eksisterende brugere</h2>
-<table border="1">
-    <tr>
-        <th>ID</th><th>Brugernavn</th><th>Rolle</th><th>Handlinger</th><th>Gemme</th>
-    </tr>
-    {% for bruger in brugere %}
-    <tr>
-        <form method="POST" action="{{ url_for('edit_user', user_id=bruger[0]) }}">
-            <td>{{ bruger[0] }}</td>
-            <td><input name="username" value="{{ bruger[1] }}"></td>
-            <td><input name="password" value="{{ bruger[2] }}"></td>
-            <td>
-                <select name="role">
-                    <option value="admin" {% if bruger[3] == 'admin' %}selected{% endif %}>Admin</option>
-                    <option value="bruger" {% if bruger[3] == 'bruger' %}selected{% endif %}>Bruger</option>
-                </select>
-                
-            </td>
-            <td>
-                <button type="submit">Opdater</button>
-                <a href="{{ url_for('delete_user', user_id=bruger[0]) }}">Slet</a>
-            </td>
-        </form>
-    </tr>
-    {% endblock %}
-</table>
+    <!-- Eksisterende brugere -->
+    <div class="card">
+        <div class="card-header bg-secondary text-white">
+            <i class="fas fa-users me-2"></i>Eksisterende brugere
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Brugernavn</th>
+                            <th>Rolle de har</th>
+                            <th>Rolle</th>
+                            <th>Handlinger</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bruger in brugere %}
+                        <tr>
+                            <form method="POST" action="{{ url_for('edit_user', user_id=bruger[0]) }}">
+                                <td>{{ bruger[0] }}</td>
+                                <td><input name="username" class="form-control" value="{{ bruger[1] }}"></td>
+                                <td><input name="password" class="form-control" value="{{ bruger[2] }}"></td>
+                                <td>
+                                    <select name="role" class="form-select">
+                                        <option value="admin" {% if bruger[3] == 'admin' %}selected{% endif %}>Admin</option>
+                                        <option value="bruger" {% if bruger[3] == 'bruger' %}selected{% endif %}>Bruger</option>
+                                    </select>
+                                </td>
+                                <td class="text-nowrap">
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn btn-sm btn-primary">Opdater</button>
+                                        <a href="{{ url_for('delete_user', user_id=bruger[0]) }}" class="btn btn-sm btn-danger">Slet</a>
+                                    </div>
+                                </td>
+                            </form>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
