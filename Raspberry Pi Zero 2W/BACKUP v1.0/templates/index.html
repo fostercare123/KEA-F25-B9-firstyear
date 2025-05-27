@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}IoT Platform - Hjem{% endblock %}
+
+{% block content %}
+<div class="row align-items-center mb-5">
+    <div class="col-lg-6">
+        <div class="hero-text">
+            <h1 class="display-4 fw-bold text-primary">Gordion's IoT platform</h1>
+            <p class="lead">Her kan du se og styre dine IoT-enheder</p>
+            <p class="mb-4">Denne platform er forbundet til enheder, som indsamler data. Få live-opdaterede målinger, analyser tendenser og styr dine enheder - uanset hvor du er.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for device_id, device in sensors.items() %}
+    <div class="col">
+        <div class="card h-100 device-card">
+            <div class="card-status {{ 'online' if device.status == 'online' else 'offline' }}"></div>
+            <div class="card-body">
+                <h5 class="card-title">{{ device.name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ device_id }}</h6>
+                <p class="card-text">
+                    <i class="fas fa-thermometer-half me-2"></i>Temperatur: <span class="temp-value">{{ device.temperature }}</span>°C<br>
+                    <i class="fas fa-water me-2"></i>Fugtighed: <span class="humidity-value">{{ device.humidity }}</span>%
+                </p>
+                <div class="device-status">
+                    <span class="badge {{ 'bg-success' if device.status == 'online' else 'bg-danger' }}">
+                        {{ 'Online' if device.status == 'online' else 'Offline' }}
+                    </span>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-sm btn-primary w-100" onclick="location.href='/dashboard'">
+                    <i class="fas fa-chart-line me-1"></i>Vis Detaljer
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h3 class="card-title">Projekt Oversigt</h3>
+                <p class="card-text">
+                    Denne IoT-platform er designet til realtids-overvågning af miljøforhold ved hjælp af ESP32-enheder.
+                    Hver enhed er udstyret med sensorer, der indsamler data om temperatur, fugtighed og mere.
+                </p>
+                <p class="card-text">
+                    Systemet bruger en Raspberry Pi Zero 2W som central enhed, der indsamler data fra ESP32-enhederne og serverer denne webgrænseflade.
+                    Kommunikationen foregår over WiFi, med data behandlet og lagret på Raspberry Pi.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
