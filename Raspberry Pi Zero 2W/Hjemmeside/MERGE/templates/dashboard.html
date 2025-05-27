@@ -58,10 +58,6 @@
                     <h3>Temperature (Last 5 Minutes)</h3>
                     <img id="tempgraph" src="" alt="Temp-Graph will appear here..." style="width:100%; max-width:1200px; border:3px solid #ccc;">
                 </div>
-                <div class="mb-4">
-                    <h3>Air Quality (Last 5 Minutes)</h3>
-                    <img id="airgraph" src="" alt="Air-Graph will appear here..." style="width:100%; max-width:1200px; border:3px solid #ccc;">
-                </div>
             </div>
         </div>
     </div>
@@ -104,11 +100,6 @@
     window.socket.on('temp_graph', function(data) {
         console.log('Received temp_graph:', data);
         document.getElementById('tempgraph').src = 'data:image/png;base64,' + data.image;
-    });
-
-    window.socket.on('air_graph', function(data) {
-        console.log('Received air_graph:', data);
-        document.getElementById('airgraph').src = 'data:image/png;base64,' + data.image;
     });
 </script>
 {% endblock %}
