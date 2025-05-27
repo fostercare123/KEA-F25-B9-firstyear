@@ -117,6 +117,10 @@ def om():
 def indstillinger():
     return render_template('indstillinger.html')
 
+@app.route('/kontakt')
+def kontakt():
+    return render_template('kontakt.html')
+
 @app.route('/send', methods=['POST'])
 def receive_data():
     data = request.get_json()
