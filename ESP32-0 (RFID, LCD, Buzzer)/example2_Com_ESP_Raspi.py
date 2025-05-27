@@ -30,12 +30,9 @@ reader = MFRC522(spi, sda)
 # Used by "com_raspi" to kill "threaded_request" in case it has frozen (eg no ack reviced)
 request_done = False
 response_data = None
-
 # URL for Raspberry pi running DB
-
 url = "http://192.168.156.9:5000/send"
 headers = {"Content-Type": "application/json"}
-
 def threaded_request(data):
     global request_done, response_data
     # Using global vars
@@ -47,15 +44,12 @@ def threaded_request(data):
     except Exception as e:
         response_data = f"Error: {e}"
     request_done = True
-
 def com_raspi(data_to_send, timeout=5):
     global request_done, response_data
     request_done = False
     response_data = None
-    
     # Starting function in own thread, to make sure it dosent freeze up the whole ESP
     _thread.start_new_thread(threaded_request, (data_to_send,))
-    
     start = time.ticks_ms() #Basic non-blocking delay
     while not request_done:
         # Clock to check how long the process has been running.
