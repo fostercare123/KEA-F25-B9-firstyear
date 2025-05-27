@@ -13,34 +13,6 @@
     </div>
 </div>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for device_id, device in sensors.items() %}
-    <div class="col">
-        <div class="card h-100 device-card">
-            <div class="card-status {{ 'online' if device.status == 'online' else 'offline' }}"></div>
-            <div class="card-body">
-                <h5 class="card-title">{{ device.name }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ device_id }}</h6>
-                <p class="card-text">
-                    <i class="fas fa-thermometer-half me-2"></i>Temperatur: <span class="temp-value">{{ device.temperature }}</span>°C<br>
-                    <i class="fas fa-water me-2"></i>Fugtighed: <span class="humidity-value">{{ device.humidity }}</span>%
-                </p>
-                <div class="device-status">
-                    <span class="badge {{ 'bg-success' if device.status == 'online' else 'bg-danger' }}">
-                        {{ 'Online' if device.status == 'online' else 'Offline' }}
-                    </span>
-                </div>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-sm btn-primary w-100" onclick="location.href='/dashboard'">
-                    <i class="fas fa-chart-line me-1"></i>Vis Detaljer
-                </button>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
-
 <div class="row mt-5">
     <div class="col-12">
         <div class="card bg-light">

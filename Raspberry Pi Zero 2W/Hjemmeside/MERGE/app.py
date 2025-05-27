@@ -55,28 +55,7 @@ def emit_loop():
 
 @app.route('/')
 def index():
-    conn = sqlite3.connect('example.db')
-    cursor = conn.cursor()
-    cursor.execute('''
-        SELECT esp_id, Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht, timestamp
-        FROM environment
-        WHERE timestamp = (SELECT MAX(timestamp) FROM environment WHERE esp_id = environment.esp_id)
-    ''')
-    data = cursor.fetchall()
-    conn.close()
-    sensors = {}
-    current_time = datetime.now()
-    for row in data:
-        esp_id = f'esp32_{row[0]}'
-        timestamp = datetime.fromisoformat(row[10].replace(' ', 'T'))
-        status = 'online' if (current_time - timestamp).total_seconds() < 60 else 'offline'
-        sensors[esp_id] = {
-            'name': f'ESP32-{row[0]}',
-            'temperature': row[8],  # Temp_aht
-            'humidity': row[9],     # Rh_aht
-            'status': status
-        }
-    return render_template('index.html', sensors=sensors)
+    return render_template('index.html')
 
 @app.route('/dashboard')
 def dashboard():
@@ -293,16 +272,6 @@ def handle_connect():
 @socketio.on('disconnect')
 def handle_disconnect():
     print('Client disconnected')
-
-@socketio.on('request_historical')
-def handle_historical(minutes):
-    global current_minutes
-    try:
-        current_minutes = int(minutes)
-    except ValueError:
-        current_minutes = 5
-    print(f'Requested historical graphs for {current_minutes} minutes')
-    update_graphs()
 
 if __name__ == '__main__':
     threading.Thread(target=emit_loop, daemon=True).start()
