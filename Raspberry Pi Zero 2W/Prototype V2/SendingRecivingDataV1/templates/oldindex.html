@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    </head>
+    <body>
+        <h1>Sensor Value:</h1>
+        <div id="value">Waiting...</div>
+
+        <h1>Live CO2 and TVOC Graph</h1>
+        <img id="CO2TVOCgraph" src="" alt="CO2 TVOC graph will appear here... ETA: 5 seconds" style="width:1200px; border:3px solid #ccc;"/>
+
+        <h1>Live Temp Graph</h1>
+        <img id="tempgraph" src="" alt="Temp-Graph will appear here... ETA: 5 seconds" style="width:1200px; border:3px solid #ccc;"/>
+
+        <h1>Live Air Graph</h1>
+        <img id="airgraph" src="" alt="Air-Graph will appear here... ETA: 5 seconds" style="width:1200px; border:3px solid #ccc;"/>
+
+        <script>
+            var socket = io();
+
+            // Update sensor value
+            socket.on('sensor_data', function(data) {
+                document.getElementById('value').innerText = data.value;
+            });
+
+            // Update CO2TVOCgraph
+            socket.on('CO2TVOCgraph', function(data) {
+                document.getElementById('CO2TVOCgraph').src = 'data:image/png;base64,' + data.image;
+            });
+
+            // Update temp graph
+            socket.on('temp_graph', function(data) {
+                document.getElementById('tempgraph').src = 'data:image/png;base64,' + data.image;
+            });
+            // Update air graph
+            socket.on('air_graph', function(data) {
+                document.getElementById('airgraph').src = 'data:image/png;base64,' + data.image;
+            });
+        </script>
+    </body>
+</html>

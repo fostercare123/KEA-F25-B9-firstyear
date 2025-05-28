@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}IoT Platform - Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <p>Velkommen, {{ session['username'] }}. Du er {{ status }}.</p>
+
+
+  <div class="chart-container">
+    <h3 class="text-center">Seneste løn per dag</h3>
+
+    <!-- Tabel -->
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Dato</th>
+                <th>Løn (kr)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in salary_data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Graf -->
+    <canvas id="salaryChart" height="120"></canvas>
+  </div>
+</div>
+{% endblock %}

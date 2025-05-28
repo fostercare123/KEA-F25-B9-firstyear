@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}IoT Platform - Hjem{% endblock %}
+
+{% block content %}
+<div class="row align-items-center mb-5">
+    <div class="col-lg-6">
+        <div class="hero-text">
+            <h1 class="display-4 fw-bold text-primary">Gordion's IoT platform</h1>
+            <p class="lead">Her kan du se og styre dine IoT-enheder</p>
+            <p class="mb-4">Denne platform er forbundet til enheder, som indsamler data. Få live-opdaterede målinger, analyser tendenser og styr dine enheder - uanset hvor du er.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h3 class="card-title">Projekt Oversigt</h3>
+                <p class="card-text">
+                    Denne IoT-platform er designet til realtids-overvågning af miljøforhold ved hjælp af ESP32-enheder.
+                    Hver enhed er udstyret med sensorer, der indsamler data om temperatur, fugtighed og mere.
+                </p>
+                <p class="card-text">
+                    Systemet bruger en Raspberry Pi Zero 2W som central enhed, der indsamler data fra ESP32-enhederne og serverer denne webgrænseflade.
+                    Kommunikationen foregår over WiFi, med data behandlet og lagret på Raspberry Pi.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
