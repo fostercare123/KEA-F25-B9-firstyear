@@ -80,5 +80,5 @@ while True:
         stop()
         
 
-    time.sleep(1)
+    time.sleep(10)
         
