@@ -1,0 +1,125 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:138.0) Gecko/20100101 Firefox/138.0" version="27.0.9">
+  <diagram name="Page-1" id="9BaqAe_Xzo-DlCCMoVBf">
+    <mxGraphModel dx="1280" dy="878" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-1" target="IbWmAUInU0lCxWrtlF4D-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-1" value="ESP starter" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-4" target="IbWmAUInU0lCxWrtlF4D-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-4" value="&lt;div&gt;Venter på at&lt;/div&gt;&lt;div&gt;scanne RFID tag &lt;br&gt;&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="346" y="200" width="136" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-6" target="IbWmAUInU0lCxWrtlF4D-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-10" value="Sender tagID (UID)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IbWmAUInU0lCxWrtlF4D-9">
+          <mxGeometry x="-0.1" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-6" value="&lt;div&gt;Laver et dictonary&lt;/div&gt;&lt;div&gt;som skal sendes til&lt;/div&gt;&lt;div&gt;Raspberry Pi&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="354" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-8" target="IbWmAUInU0lCxWrtlF4D-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-20" value="&lt;div&gt;Dictonary med:&lt;/div&gt;&lt;div&gt;Navn&lt;br&gt;Minutter arbejdet&lt;/div&gt;&lt;div&gt;Løn&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IbWmAUInU0lCxWrtlF4D-13">
+          <mxGeometry x="-0.0088" y="-1" relative="1" as="geometry">
+            <mxPoint x="1" y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-8" value="ESP32&lt;br&gt;&lt;div&gt;HTTP Post&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=offPageConnector;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="374" y="560" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-12" target="IbWmAUInU0lCxWrtlF4D-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-16" value="Ja" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IbWmAUInU0lCxWrtlF4D-15">
+          <mxGeometry x="-0.2571" y="-3" relative="1" as="geometry">
+            <mxPoint x="2" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-12" target="IbWmAUInU0lCxWrtlF4D-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-19" value="Nej" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IbWmAUInU0lCxWrtlF4D-18">
+          <mxGeometry x="-0.0304" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-12" value="&lt;div&gt;Hvis&lt;/div&gt;&lt;div&gt;min==0&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="374" y="870" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-14" target="IbWmAUInU0lCxWrtlF4D-26">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="587" y="800" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="600" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-14" value="&lt;div&gt;Skriver på skræmen&lt;/div&gt;&lt;div&gt;Velkommen på&lt;/div&gt;&lt;div&gt;arbejde NAVN&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="514" y="880" width="146" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-17" target="IbWmAUInU0lCxWrtlF4D-26">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="253" y="800" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="260" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-17" value="&lt;div&gt;Skriver på skræmen&lt;/div&gt;&lt;div&gt;God dag NAVN&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="880" width="146" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-21" target="IbWmAUInU0lCxWrtlF4D-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-21" value="&lt;div&gt;Afspil lyd&lt;/div&gt;på buzzer" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="346" y="290" width="136" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-23" target="IbWmAUInU0lCxWrtlF4D-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-23" value="&lt;div&gt;Skriv på skærmen&lt;/div&gt;&lt;div&gt;&quot;Vent Venligst&quot;&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="346" y="380" width="136" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-26" target="IbWmAUInU0lCxWrtlF4D-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="562" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-26" value="&lt;div&gt;Skriv på skærmen&lt;/div&gt;&lt;div&gt;Velkommen&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="346" y="110" width="136" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-30" target="IbWmAUInU0lCxWrtlF4D-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-33" value="Nej" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IbWmAUInU0lCxWrtlF4D-32">
+          <mxGeometry x="0.0333" y="-3" relative="1" as="geometry">
+            <mxPoint x="3" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-34" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="IbWmAUInU0lCxWrtlF4D-30" target="IbWmAUInU0lCxWrtlF4D-26">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="534" y="750" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="600" y="750" />
+              <mxPoint x="600" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IbWmAUInU0lCxWrtlF4D-30" value="&lt;div&gt;Hvis&lt;/div&gt;&lt;div&gt;None&lt;/div&gt;/Fejl" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="374" y="710" width="80" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
