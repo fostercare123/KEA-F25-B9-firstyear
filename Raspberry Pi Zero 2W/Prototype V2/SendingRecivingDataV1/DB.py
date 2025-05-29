@@ -379,6 +379,8 @@ def sessionupdate(name):
             "Paid": paid
         }
         return(response)
+    else:
+        print("Mistake happend in sessionupdate funktion in DB.py. \nAn unexpectet issue happend duing the active sessions check".)
     print("\n----------")
     
     conn.close()
