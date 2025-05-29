@@ -7,9 +7,7 @@ from datetime import datetime, timezone
 conn = sqlite3.connect("example.db", check_same_thread=False)
 cursor = conn.cursor()
 
-### MAIN
-
-
+### main.table
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS main (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,7 +22,7 @@ cursor.execute('''
 conn = sqlite3.connect('example.db')
 cursor = conn.cursor()
 cursor.execute("SELECT * FROM main WHERE name = 'Anders'")
-if not cursor.fetchone():
+if not cursor.fetchone(): # Adding dummies employess just in case DB needs rebuilding
     cursor.execute(
         "INSERT INTO main (name, tagid, salary, otlimit, otform) VALUES (?, ?, ?, ?, ?)",
         ('Anders', '0x53fcc401', 100.0, 5.0, 50.0)
@@ -39,8 +37,8 @@ if not cursor.fetchone():
     )
 conn.commit()
 
+### Sessions.table
 
-### SESSIONS
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS sessions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -56,12 +54,11 @@ cursor.execute('''
     )
 ''')
 
-### environment
+### environment.table
 # Example
 # {'ID': 1, 'Aqi': 2, 'Tvoc': 73, 'Eco2': 502, 'Rh_ens': 0.1953125,
 #  'Eco2_rating': 'Excellent - Target level', 'Tvoc_rating': 'Good',
 #  'Temp_ens': 276.0063, 'Temp_aht': 25.67, 'Rh_aht': 40.45, 'ERRORS': 0}
-# 
 
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS environment (
@@ -79,12 +76,10 @@ cursor.execute('''
         LDR REAL
     )
 ''')
-# Api Tvoc Eco2 Rhens Eco2rating Tvocrating Tempens Tempaht Rhaht
+
 # Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht
 
-
-
-### Errors table!
+### Errors.table
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS errors (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -98,6 +93,7 @@ cursor.execute('''
 
 
 ### Empty tags table! unallocatedtags
+
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS unallocatedtags (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -107,7 +103,7 @@ cursor.execute('''
 ''')
 
 
-conn.close() #THIS BIT LAST!!!
+conn.close() #THIS BIT LAST!!! Closes the connection to DB
 
 # ESP 2 funtions
 
@@ -123,6 +119,7 @@ def fetch_latest_AQI():
     return(aqi)
 # Unknow tags functions
 
+# ESP 0 functions
 def report_new_unknown_tag(UID):
     conn = sqlite3.connect("example.db", check_same_thread=False)
     cursor = conn.cursor()
@@ -191,11 +188,9 @@ def fetch_temps_last_x_minutes(minutes):
     return cursor.fetchall()
     conn.close()    
 
-
 #                                                             #
 # environment ### environment ### environment ### environment #
 #                                                             #
-
 
 # Function to insert a new temp reading with automatic timestamp
 def create_new_temp_reading(Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Tempens, Tempaht, Rhaht, LDR):
@@ -213,11 +208,9 @@ def create_new_temp_reading(Aqi, Tvoc, Eco2, Rhens, Eco2rating, Tvocrating, Temp
     conn.commit()
     conn.close()
 
-
 #                                                     #
 # EMPLOYESS ### EMPLOYESS ### EMPLOYESS ### EMPLOYESS #
 #                                                     #
-
 
 # Function to insert a employee with automatic timestamp
 def create_new_employee(name, tagid, salary, otlimit, otform):
@@ -290,7 +283,7 @@ def convert_uid_to_name(uid):
     return result[0]
     conn.close()
 
-def sessionupdate(name):
+def sessionupdate(name): # ESP 0
     '''
     Session administration. Runs a check to see if a session is currently active. If so, it ends that session, if not, it starts a new session
     '''
