@@ -1,0 +1,260 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.1.1">
+  <diagram name="Page-1" id="O-ZgrqWLTxctkHlJ_Id7">
+    <mxGraphModel dx="1434" dy="1116" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="XTUj5HFpBCMkvnS5G_jR-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="XTUj5HFpBCMkvnS5G_jR-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XTUj5HFpBCMkvnS5G_jR-4" value="Data 1, Data 2, Tid" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="XTUj5HFpBCMkvnS5G_jR-3" vertex="1" connectable="0">
+          <mxGeometry x="-0.424" y="-4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XTUj5HFpBCMkvnS5G_jR-1" value="DB.py&lt;div&gt;fetch latest&lt;/div&gt;&lt;div&gt;readings&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=offPageConnector;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="380" y="380" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="XTUj5HFpBCMkvnS5G_jR-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="XTUj5HFpBCMkvnS5G_jR-5" target="XTUj5HFpBCMkvnS5G_jR-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XTUj5HFpBCMkvnS5G_jR-5" value="Tilgå environment&lt;div&gt;table i DB&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="350" y="490" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-4" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="XTUj5HFpBCMkvnS5G_jR-6" target="PK_kmASMSI7oSbR-AO80-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XTUj5HFpBCMkvnS5G_jR-6" value="Generer grafer&lt;div&gt;vha matplotlib&lt;/div&gt;&lt;div&gt;i graphs.py&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="360" y="690" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XTUj5HFpBCMkvnS5G_jR-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="XTUj5HFpBCMkvnS5G_jR-8" target="XTUj5HFpBCMkvnS5G_jR-6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XTUj5HFpBCMkvnS5G_jR-8" value="Sorter og behandl&lt;div&gt;data baseret på&lt;/div&gt;&lt;div&gt;input parameter&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="360" y="590" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XTUj5HFpBCMkvnS5G_jR-11" value="app.py&lt;div&gt;fetch latest&lt;/div&gt;&lt;div&gt;readings&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=offPageConnector;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="380" y="910" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-5" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-3" target="XTUj5HFpBCMkvnS5G_jR-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-6" value="Returner base64 streng&lt;div&gt;til app.py&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-5">
+          <mxGeometry x="-0.22" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-3" value="Konverter grafer&lt;div&gt;til base64 format&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="780" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-9" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-7" target="PK_kmASMSI7oSbR-AO80-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-10" value="UID" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-9">
+          <mxGeometry x="-0.28" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-7" value="DB.py&lt;div&gt;sessionupdate&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=offPageConnector;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="380" width="110" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-12" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-8" target="PK_kmASMSI7oSbR-AO80-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-13" value="Name" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-12">
+          <mxGeometry x="-0.31" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-8" value="Anvender UID&lt;div&gt;til at finde navn&lt;/div&gt;&lt;div&gt;i main.table&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="535" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-15" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;exitX=0.53;exitY=1.011;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-11" target="PK_kmASMSI7oSbR-AO80-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-16" value="Check" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-15">
+          <mxGeometry x="-0.06" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-11" value="Check udføres&lt;div&gt;med navn&lt;/div&gt;&lt;div&gt;til at fastslå om der&lt;/div&gt;&lt;div&gt;er en igangværende&lt;/div&gt;&lt;div&gt;session, baseret på om der er en række med et tomt felt i endtimestamp&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="590" width="170" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-18" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="695" y="797.08" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-19" value="Ja" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-18">
+          <mxGeometry x="-0.232" y="-2" relative="1" as="geometry">
+            <mxPoint x="-1" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-29" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-14" target="PK_kmASMSI7oSbR-AO80-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-30" value="Nej" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-29">
+          <mxGeometry x="-0.0133" y="-1" relative="1" as="geometry">
+            <mxPoint x="1" y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-14" value="&amp;nbsp;&lt;div&gt;len(check)&lt;/div&gt;&lt;div&gt;== 0&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="757.08" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-22" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="895" y="797.08" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-23" value="data&amp;nbsp;&lt;span style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;fra&lt;/span&gt;&lt;div&gt;main.table&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-22">
+          <mxGeometry x="-0.3" y="1" relative="1" as="geometry">
+            <mxPoint x="13" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-20" value="Henter info fra&lt;div&gt;main.table&amp;nbsp;&lt;/div&gt;&lt;div&gt;omkring den&amp;nbsp;&lt;/div&gt;&lt;div&gt;ansatte&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="685" y="757.08" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-27" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-25" target="PK_kmASMSI7oSbR-AO80-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-25" value="Dette data&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;sammen&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;med navnet indsættes i sessions.table&lt;/span&gt;&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="885" y="757.08" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-63" value="" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;strokeColor=default;entryX=1.01;entryY=0.368;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-26" target="PK_kmASMSI7oSbR-AO80-57">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1335" y="800" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1370" y="797" />
+              <mxPoint x="1370" y="900" />
+              <mxPoint x="1370" y="1027" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-26" value="Data pakkes ind&lt;div&gt;i et dict som returneres&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1095" y="767.08" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-31" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-28">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="997.08" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-32" value="Text" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-31">
+          <mxGeometry y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-35" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-28" target="PK_kmASMSI7oSbR-AO80-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-36" value="Ja" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-35">
+          <mxGeometry x="-0.4982" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-28" value="&amp;nbsp;&lt;div&gt;len(check)&lt;/div&gt;&lt;div&gt;== 1&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="867.08" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-58" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-33" target="PK_kmASMSI7oSbR-AO80-57">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-33" value="funktioen printer fejlbesked da sessions.table indeholder et uventet antal aktive sessions" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="997.08" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-38" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-34" target="PK_kmASMSI7oSbR-AO80-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-34" value="Henter info fra&lt;div&gt;sessions.table&amp;nbsp;&lt;/div&gt;&lt;div&gt;omkring den&amp;nbsp;&lt;/div&gt;&lt;div&gt;igangværende&lt;/div&gt;&lt;div&gt;session&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="685" y="867.08" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-40" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-37" target="PK_kmASMSI7oSbR-AO80-39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-37" value="Timeløn, samt overtid(OT) bereninger bliver lavet" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="832" y="872.08" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-42" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-39" target="PK_kmASMSI7oSbR-AO80-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-39" value="Dette nye beregnet data indsættes i sessions.db, sammen med&amp;nbsp;&lt;div&gt;endtimestamp, hvilket&amp;nbsp;&lt;/div&gt;&lt;div&gt;afslutter denne session&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="985" y="857.08" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-62" value="" style="edgeStyle=none;curved=0;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;entryX=1.012;entryY=0.367;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-41" target="PK_kmASMSI7oSbR-AO80-57">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1246" y="1026" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-41" value="Data pakkes ind&lt;div&gt;i et dict som returneres&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1185.5" y="877.08" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-43" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-45">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="800" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-44" value="Data 1, Data 2, Tid" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-43">
+          <mxGeometry x="-0.424" y="-4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-45" value="DB.py&lt;div&gt;fetch AQI&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=offPageConnector;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="380" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-47" value="Tilgå environment&lt;div&gt;table i DB og hent&amp;nbsp;&lt;/div&gt;&lt;div&gt;kun AQI (Air Quality)&amp;nbsp;&amp;nbsp;&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="490" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-52" value="app.py&lt;div&gt;fetch AQI&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=offPageConnector;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="605" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-53" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-47" target="PK_kmASMSI7oSbR-AO80-52">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="800" y="840" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-56" value="Returnere AQI" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-53">
+          <mxGeometry x="-0.3837" y="-1" relative="1" as="geometry">
+            <mxPoint x="1" y="14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-57" value="&lt;div&gt;app.py&lt;div&gt;sessionupdate&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=offPageConnector;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="997.08" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-65" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-67" target="PK_kmASMSI7oSbR-AO80-68">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="965" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-66" value="Machine, Error,&amp;nbsp;&lt;div&gt;Amout, Errormessage&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-65">
+          <mxGeometry x="-0.424" y="-4" relative="1" as="geometry">
+            <mxPoint y="12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-67" value="DB.py&lt;div&gt;report_error&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=offPageConnector;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="925" y="380" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-68" value="Fejlnen, samt dens&amp;nbsp;&lt;div&gt;info gemmes i errors.table&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="895" y="522.5" width="140" height="77.5" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-72" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="PK_kmASMSI7oSbR-AO80-74">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1140" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-73" value="Sensordata, LDR" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PK_kmASMSI7oSbR-AO80-72">
+          <mxGeometry x="-0.424" y="-4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-74" value="DB.py&lt;div&gt;create new reading&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=offPageConnector;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="380" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK_kmASMSI7oSbR-AO80-75" value="Sensordata, LDR og timestamp gemmes i environment.table" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="490" width="160" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
