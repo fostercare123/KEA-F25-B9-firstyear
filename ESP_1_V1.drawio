@@ -1,0 +1,176 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.1.1">
+  <diagram name="Page-1" id="YFPHl6AUL4e2xg9wOuTj">
+    <mxGraphModel dx="1154" dy="818" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-38" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-1" target="ARTZC1EIimjCeW_RJ8dd-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-1" value="ESP 1&lt;div&gt;Starter&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="353" y="130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="413" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-10" value="&lt;div&gt;ACK fra&lt;br&gt;Raspberry Pi&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ARTZC1EIimjCeW_RJ8dd-9">
+          <mxGeometry x="-0.3701" relative="1" as="geometry">
+            <mxPoint y="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-5" value="ESP32&lt;br&gt;&lt;div&gt;HTTP Post&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=offPageConnector;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="373" y="330" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" target="ARTZC1EIimjCeW_RJ8dd-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="413" y="275.28999999999996" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-8" value="Sender dictionary med sensordata og LDR" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ARTZC1EIimjCeW_RJ8dd-7">
+          <mxGeometry x="-0.3" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-6" value="Måler sensordata&lt;div&gt;og LDR&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="348" y="220" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-47" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-11" target="ARTZC1EIimjCeW_RJ8dd-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="534" y="1080" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="660" y="1080" />
+              <mxPoint x="660" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-11" value="Vent 10 sek" style="shape=delay;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="374" y="1060" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-15" target="ARTZC1EIimjCeW_RJ8dd-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-21" value="Nej" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ARTZC1EIimjCeW_RJ8dd-18">
+          <mxGeometry x="0.1786" y="-1" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-15" target="ARTZC1EIimjCeW_RJ8dd-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-20" value="Ja" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ARTZC1EIimjCeW_RJ8dd-19">
+          <mxGeometry x="-0.4506" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-15" value="Er AVG&amp;nbsp;&lt;br&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;eCO2&lt;/span&gt;&lt;div&gt;&lt;div&gt;&amp;gt; 1000?&lt;/div&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="373" y="690" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-42" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-16" target="ARTZC1EIimjCeW_RJ8dd-26">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="554" y="790" />
+              <mxPoint x="413" y="790" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-16" value="Tænd NEO-Pixel&lt;br&gt;0" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="489" y="700" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-43" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-17" target="ARTZC1EIimjCeW_RJ8dd-26">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="274" y="790" />
+              <mxPoint x="413" y="790" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-17" value="Sluk NEO-Pixel&lt;br&gt;0" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="209" y="700" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-26" target="ARTZC1EIimjCeW_RJ8dd-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-23" value="Nej" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ARTZC1EIimjCeW_RJ8dd-22">
+          <mxGeometry x="0.1786" y="-1" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-26" target="ARTZC1EIimjCeW_RJ8dd-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-25" value="Ja" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ARTZC1EIimjCeW_RJ8dd-24">
+          <mxGeometry x="-0.4506" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-26" value="Er AVG&lt;br&gt;TVOC&lt;div&gt;&amp;gt; 200?&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="373" y="820" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-45" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-27" target="ARTZC1EIimjCeW_RJ8dd-33">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="554" y="920" />
+              <mxPoint x="413" y="920" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-27" value="Tænd NEO-Pixel&lt;br&gt;1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="489" y="830" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-44" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-28" target="ARTZC1EIimjCeW_RJ8dd-33">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="274" y="920" />
+              <mxPoint x="413" y="920" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-28" value="Sluk NEO-Pixel&lt;br&gt;1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="209" y="830" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-33" target="ARTZC1EIimjCeW_RJ8dd-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-30" value="Nej" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ARTZC1EIimjCeW_RJ8dd-29">
+          <mxGeometry x="0.1786" y="-1" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-33" target="ARTZC1EIimjCeW_RJ8dd-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-32" value="Ja" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ARTZC1EIimjCeW_RJ8dd-31">
+          <mxGeometry x="-0.4506" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-46" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-33" target="ARTZC1EIimjCeW_RJ8dd-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-33" value="Er Avg&lt;br&gt;AQI&lt;div&gt;&amp;gt; 2&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="373" y="950" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-34" value="Tænd NEO-Pixel&lt;br&gt;2" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="489" y="960" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-35" value="Sluk NEO-Pixel&lt;br&gt;2" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="209" y="960" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-40" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-36" target="ARTZC1EIimjCeW_RJ8dd-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-36" value="Sætter eCO2, TVOC&lt;div&gt;AQI i en buffer med&lt;/div&gt;&lt;div&gt;5 målinger&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="353" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-41" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ARTZC1EIimjCeW_RJ8dd-37" target="ARTZC1EIimjCeW_RJ8dd-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ARTZC1EIimjCeW_RJ8dd-37" value="Beregner gennesnit&lt;div&gt;ud fra buffer&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="353" y="590" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
