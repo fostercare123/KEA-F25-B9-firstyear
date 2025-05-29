@@ -1,8 +1,8 @@
 import DB # All DB-related things go here!
 import graphs # Graph stuff goes here
-import threading
+import threading # For socketIO emit graph function
 import base64 # Graphs and graphics
-import sqlite3
+import sqlite3 # DB for login-system
 import os
 from datetime import datetime, timedelta
 
@@ -39,15 +39,7 @@ def indstillinger():
 def kontakt():
     return render_template('oldindex.html')
 
-
-
-
-
-# 
-# Important stuff, dont touch.....
-# 
-
-# Emit loop, that updates the graphs every 5 seconds
+# Emit loop, that updates the graphs once every second (If the Raspberry Pi can even mangage that...)
 def update_graphs():
     # Temp Graph
     graph_img = graphs.create_graph(9,10, 90) #See graph.datanames for explanation
@@ -70,10 +62,8 @@ def emit_loop():
 @app.route('/send', methods=['POST'])
 def receive_data():
     data = request.get_json()
-    print("---------- New Post Request ----------")
+    print("---------- New /send Request ----------")
     print(f"This is of datatype: {type(data)} .Raw data that was sent:")
-    # create_new_employee(name, tagid, salary, otlimit, otform)
-    # DB.create_new_employee("Bo", "0x53fcc401", 200, 5, 100)
     # Check to see if UID match anyone in the DB
     print(data)
     
@@ -107,9 +97,10 @@ def receive_data():
     else:
         response = {"message": "Hello ESP32, got your value, but did not do anything with it: " + str(data)}
     print(f"This is the data that was returned to ESP32: {response}")
+    print("---------- End of /send Request ----------")
     return jsonify(response)
 
-# Markus login system
+# Login system
 
 def init_db():
     conn = sqlite3.connect('username.db')
@@ -149,8 +140,8 @@ def login():
 
         if user:
             role = user[0]
-            session['username'] = username  # <- Gem brugerens navn i session
-            session['role'] = role          # <- Gem rollen også
+            session['username'] = username  # Gem brugerens navn i session
+            session['role'] = role          # Gem rollen også
             if role == 'admin':
                 return redirect(url_for('admin'))
             else:
@@ -266,9 +257,9 @@ def vis_brugere():
         status=status
     )
 
-# Markus login system ^^^^
+# login system slut ^^^^
 
-if __name__ == '__main__':
+if __name__ == '__main__': # Checks to see if this file is run as the main file
     threading.Thread(target=emit_loop, daemon=True).start() #Starts Sensor Loop with threading enabled
-    init_db()
-    socketio.run(app, host='0.0.0.0', port=5000)
+    init_db() # Opstarter login DB
+    socketio.run(app, host='0.0.0.0', port=5000) # Hoster på port 5000
