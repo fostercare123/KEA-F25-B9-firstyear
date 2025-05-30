@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}IoT Platform - Brugerstyring{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Brugerstyring</h1>
+
+    <!-- Tilføj ny bruger -->
+    <div class="card mb-5">
+        <div class="card-header bg-primary text-white">
+            <i class="fas fa-user-plus me-2"></i>Tilføj ny bruger
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('add_user') }}">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <input type="text" name="username" class="form-control" placeholder="Brugernavn" required>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="password" class="form-control" placeholder="Adgangskode" required>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="role" class="form-select">
+                            <option value="admin">Admin</option>
+                            <option value="bruger">Bruger</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1 d-grid">
+                        <button type="submit" class="btn btn-success">Tilføj</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Eksisterende brugere -->
+    <div class="card">
+        <div class="card-header bg-secondary text-white">
+            <i class="fas fa-users me-2"></i>Eksisterende brugere
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Brugernavn</th>
+                            <th>Rolle de har</th>
+                            <th>Rolle</th>
+                            <th>Handlinger</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bruger in brugere %}
+                        <tr>
+                            <form method="POST" action="{{ url_for('edit_user', user_id=bruger[0]) }}">
+                                <td>{{ bruger[0] }}</td>
+                                <td><input name="username" class="form-control" value="{{ bruger[1] }}"></td>
+                                <td><input name="password" class="form-control" value="{{ bruger[2] }}"></td>
+                                <td>
+                                    <select name="role" class="form-select">
+                                        <option value="admin" {% if bruger[3] == 'admin' %}selected{% endif %}>Admin</option>
+                                        <option value="bruger" {% if bruger[3] == 'bruger' %}selected{% endif %}>Bruger</option>
+                                    </select>
+                                </td>
+                                <td class="text-nowrap">
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn btn-sm btn-primary">Opdater</button>
+                                        <a href="{{ url_for('delete_user', user_id=bruger[0]) }}" class="btn btn-sm btn-danger">Slet</a>
+                                    </div>
+                                </td>
+                            </form>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

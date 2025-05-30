@@ -1,0 +1,55 @@
+/* 1) Import Lato fonten og bruger den på hele siden */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #FAFAF5;
+}
+
+.bg-primary {
+    background-color: #6B8884 !important;
+}
+
+.card-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.team-card {
+    transition: transform 0.3s ease;
+}
+.team-card:hover {
+    transform: translateY(-5px);
+}
+.team-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Custom turquoise navbar */
+.navbar-custom {
+    background-color: #98A9A4 !important;
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: #fefefe !important;
+}
+.navbar-custom .nav-link:hover {
+    color: #c6fff4 !important;
+}
+
+/* Match footer baggrund til navbar farven */
+footer.footer {
+    background-color: #98A9A4 !important;
+}
+
+/* Give all cards a new background */
+.card,
+.team-card {
+    background-color: #fafafa !important;
+}
