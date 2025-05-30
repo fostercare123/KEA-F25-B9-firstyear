@@ -19,9 +19,7 @@ datanames = {
     9: "Temperature (%)",       # Temp from AHT
     10: "Humidity (°)",         #Humidity from AHT
     11: "LDR",                  #Light dependent resistor
-
 }
-
 def create_graph(datarow, datarow2 = 0, minuts = 5):
     #print("----------------------------------")
     #print(f"Create Graph Function is running")
@@ -54,8 +52,6 @@ def create_graph(datarow, datarow2 = 0, minuts = 5):
     values = [row[datarow] for row in recent_data]  # value
     if datarow2 != 0:
         values2 = [row[datarow2] for row in recent_data] # Value 2
-    
-    # print(recent_data)
 
     fig = Figure(figsize=(12, 6))  # Width=3 inches, Height=1 inch
     # Axix X
