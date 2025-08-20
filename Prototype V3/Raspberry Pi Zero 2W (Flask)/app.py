@@ -39,7 +39,7 @@ def indstillinger():
 def kontakt():
     return render_template('oldindex.html')
 
-# Emit loop, that updates the graphs once every second (If the Raspberry Pi can even mangage that...)
+# Emit loop that updates the graphs once every second
 def update_graphs():
     # Temp Graph
     graph_img = graphs.create_graph(9,10, 90) #See graph.datanames for explanation
